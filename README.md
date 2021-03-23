@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e2adee17-47e6-427e-a83e-a6eeb9d01cb3/deploy-status)](https://app.netlify.com/sites/pomodoro-jacob-shuman/deploys)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

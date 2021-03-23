@@ -2,20 +2,32 @@
   "name": "pomodoro",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "run-p dev:netlify storybook",
+    "dev:netlify": "ntl dev -c \"next dev\"",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@twind/next": "^1.0.6",
     "next": "10.0.9",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "twind": "^0.16.8"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
     "@netlify/plugin-nextjs": "^3.0.3",
+    "@storybook/addon-actions": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
+    "babel-loader": "^8.2.2",
+    "netlify-plugin-cache-nextjs": "^1.5.2",
+    "npm-run-all": "^4.1.5",
+    "storybook-addon-designs": "^5.4.5",
     "typescript": "^4.2.3"
   }
 }

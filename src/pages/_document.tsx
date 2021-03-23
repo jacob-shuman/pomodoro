@@ -1,15 +1,27 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+import withTwindDocument from "@twind/next/document";
+import twindConfig from "../../twind.config";
 
-class MyDocument extends Document {
+class Document extends NextDocument {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
     return { ...initialProps };
   }
 
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -19,4 +31,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument;
+export default withTwindDocument(twindConfig, Document);

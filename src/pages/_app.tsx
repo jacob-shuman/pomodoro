@@ -1,5 +1,9 @@
-function MyApp({ Component, pageProps }) {
+import withTwindApp from "@twind/next/app";
+import twindConfig from "../../twind.config";
+
+function App({ Component, pageProps }) {
+  // useEffect(() => {});
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default withTwindApp(twindConfig, App);
