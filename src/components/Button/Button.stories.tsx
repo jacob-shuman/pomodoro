@@ -14,14 +14,6 @@ export default {
   },
 } as Meta;
 
-// const Template: Story<ButtonProps> = (args) => <Button {...args} />;
-
-// export const Active = Template.bind({});
-// Active.args = { children: "Active" };
-
-// export const Inactive = Template.bind({});
-// Inactive.args = { children: "Inactive" };
-
 export const Active: Story<ButtonProps> = (args) => <Button {...args} />;
 Active.args = { children: "Active", active: true };
 

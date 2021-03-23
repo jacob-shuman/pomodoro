@@ -1,12 +1,12 @@
 import { tw } from "twind";
 
-export interface ButtonProps
+export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
     React.ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ active, children }) => {
+const PeriodCard: React.FC<PeriodCardProps> = ({ active, children }) => {
   return (
     <button
       className={tw(
@@ -19,4 +19,4 @@ const Button: React.FC<ButtonProps> = ({ active, children }) => {
   );
 };
 
-export default Button;
+export default PeriodCard;
