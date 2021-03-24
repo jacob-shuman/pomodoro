@@ -14,7 +14,8 @@
     "@use-it/interval": "^1.0.0",
     "next": "10.0.9",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "twind": "^0.16.9"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
