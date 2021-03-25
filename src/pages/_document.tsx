@@ -22,8 +22,10 @@ class Document extends NextDocument {
             rel="stylesheet"
           />
         </Head>
+
         <body>
           <Main />
+
           <NextScript />
         </body>
       </Html>

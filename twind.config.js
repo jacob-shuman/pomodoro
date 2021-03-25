@@ -30,6 +30,11 @@ export default {
             idle: "#640D14",
           },
         },
+        peach: {
+          active: "#b44c32",
+          hover: "#d85b3c",
+          idle: "#f06543",
+        },
       },
     },
     fontFamily: {

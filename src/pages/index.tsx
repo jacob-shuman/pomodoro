@@ -1,95 +1,102 @@
 import { tw } from "twind";
-import useTimer, { TimerDuration } from "../hooks/useTimer";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import Button from "../components/Button/Button";
-import { decrementDuration } from "../utils/pomodoro";
+import Icon from "../components/Icon/Icon";
+import ButtonRow from "../components/ButtonRow/ButtonRow";
+import PeriodCard from "../components/PeriodCard/PeriodCard";
 import { useState } from "react";
+import usePomodoro from "../hooks/usePomodoro";
+import { getHumanReadableDuration } from "../utils/timer";
 
-export interface PomodoroPeriod {
-  // Name of period
-  title: string;
-
-  // How long the period will last
-  duration: TimerDuration;
-
-  remaining?: TimerDuration;
-}
-
-export default function Home() {
-  const [periods, setPeriods] = useState<PomodoroPeriod[]>([
-    {
-      title: "Focus",
-      duration: { hours: 0, minutes: 0, seconds: 10 },
-    },
-  ]);
-  const period: number = 0;
-
-  const getRemainingTime = () =>
-    periods[period]?.remaining ?? periods[period].duration;
-
-  const timer = useTimer({
-    onTick: () => {
-      const remaining = decrementDuration(getRemainingTime());
-
-      setPeriods([
-        {
-          title: "Focus",
-          duration: { hours: 0, minutes: 0, seconds: 10 },
-          remaining,
-        },
-      ]);
-
-      if (
-        remaining.hours === 0 &&
-        remaining.minutes === 0 &&
-        remaining.seconds === 0
-      ) {
-        timer.stop();
-        console.log("completed period!");
-      }
-    },
-  });
+const DesignPage: React.FC = () => {
+  const [tab, setTab] = useState<"queue" | "settings">("queue");
+  const pomodoro = usePomodoro();
 
   return (
-    <main className={tw`flex flex-col p-16 space-y-8`}>
-      <header className={tw`flex flex-col space-y-2`}>
-        <h1 className={tw`text-4xl font-bold`}>Pomodoro</h1>
-        <h2 className={tw`text-xl`}>{JSON.stringify(timer.elapsedTime)}</h2>
-      </header>
-      <br />
+    <div className={tw`flex items-center justify-center h-full space-x-32`}>
+      <section
+        className={tw`h-1/2 my-auto flex flex-col space-y-8 items-center`}
+      >
+        <ButtonRow>
+          <Button active={tab === "queue"} onClick={() => setTab("queue")}>
+            Queue
+          </Button>
+          <Button
+            active={tab === "settings"}
+            onClick={() => setTab("settings")}
+          >
+            Settings
+          </Button>
+        </ButtonRow>
 
-      <section>
-        <div className={tw``}>
-          <h3 className={tw`text-lg`}>Period: {period}</h3>
-          <h4 className={tw`text-lg`}>
-            {period < periods.length &&
-              period > -1 &&
-              JSON.stringify(periods[period])}
-          </h4>
-        </div>
+        {tab === "queue" && pomodoro.periods && pomodoro.periods.length > 0 && (
+          <ul className={tw`flex flex-col space-y-4`}>
+            {pomodoro.periods.map((p, i) => (
+              <li>
+                <PeriodCard
+                  active={pomodoro.period === i}
+                  time={getHumanReadableDuration(p.duration)}
+                >
+                  {p.title}
+                </PeriodCard>
+              </li>
+            ))}
+          </ul>
+        )}
 
-        <div className={tw`flex flex-col space-y-8`}>
-          <div className={tw`grid grid-cols-4 gap-x-8`}>
-            <Button active onClick={() => timer.toggle()}>
-              {timer.isRunning ? "Stop" : "Start"}
-            </Button>
-
-            <Button
-              active
-              onClick={() => {
-                timer.set({ hours: 0, minutes: 0, seconds: 0 });
-                setPeriods([
-                  {
-                    title: "Focus",
-                    duration: { hours: 0, minutes: 0, seconds: 10 },
-                  },
-                ]);
-              }}
-            >
-              Reset
-            </Button>
-          </div>
-        </div>
+        {tab === "settings" && (
+          <>
+            <h1>Sync</h1>
+            <h1>Theme</h1>
+          </>
+        )}
       </section>
-    </main>
+
+      <section className={tw`flex flex-col space-y-16 items-center`}>
+        <CircularProgressbarWithChildren
+          className={tw`w-96`}
+          value={pomodoro.getPercentCompleted()}
+          styles={buildStyles({
+            pathColor: "#D92430",
+            trailColor: "transparent",
+          })}
+        >
+          <div
+            className={tw`flex flex-col space-y-8 text-4xl font-bold text-center text-white font-poppins`}
+          >
+            <h1>
+              {pomodoro.periods[pomodoro.period] &&
+                pomodoro.periods[pomodoro.period].title}
+            </h1>
+            {pomodoro.periods[pomodoro.period].remaining && (
+              <h1>
+                {getHumanReadableDuration(
+                  pomodoro.periods[pomodoro.period].remaining
+                )}
+              </h1>
+            )}
+          </div>
+        </CircularProgressbarWithChildren>
+
+        <ButtonRow>
+          <Button icon onClick={() => {}}>
+            <Icon name="rewind" />
+          </Button>
+
+          <Button icon onClick={() => pomodoro.toggle()}>
+            <Icon name={pomodoro.isRunning ? "pause" : "play"} />
+          </Button>
+
+          <Button icon onClick={() => {}}>
+            <Icon name="skip" />
+          </Button>
+        </ButtonRow>
+      </section>
+    </div>
   );
-}
+};
+
+export default DesignPage;

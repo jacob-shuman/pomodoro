@@ -2,15 +2,12 @@ import useInterval from "@use-it/interval";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   PomodoroPeriod,
-  PomodoroDuration,
+  PomodoroDurationOld,
   PomodoroError,
 } from "../models/pomodoro";
-import {
-  decrementDuration,
-  isPeriodComplete,
-  isValidPeriod,
-} from "../utils/pomodoro";
-import { useReduction } from "./useReduction";
+// import { decrementDuration } from "../utils/timer";
+// import { isPeriodComplete, isValidPeriod } from "../utils/pomodoro";
+// import { useReduction } from "./useReduction";
 
 // export class PomodoroTimer {
 //   private periodIndex: number = 0;
@@ -210,64 +207,58 @@ export interface usePomodoroProps {
 }
 
 export const usePomodoro = ({ initialTimer }: usePomodoroProps = {}) => {
-  const [timer, setTimer] = useReduction<PomodoroTimer>(
-    initialTimer ?? {
-      running: false,
-      periods: [
-        {
-          title: "Focus Period",
-          duration: { hours: 0, minutes: 0, seconds: 5 },
-        },
-      ],
-    }
-  );
-  const period = useRef<PomodoroPeriod>(timer.periods[0]);
-
-  useEffect(() => {
-    period.current = timer.periods[timer.currentPeriod];
-  }, [timer]);
-
-  useInterval(
-    () => {
-      const remainingTime = decrementDuration(
-        timer.periods[timer.currentPeriod ?? 0].remainingTime ??
-          timer.periods[timer.currentPeriod ?? 0].duration
-      );
-
-      console.log("ran");
-      setTimer({
-        periods: timer.periods.map((p, i) =>
-          i === timer.currentPeriod ? { ...p, remainingTime } : p
-        ),
-        running: !isPeriodComplete(timer.periods[timer.currentPeriod ?? 0]),
-      });
-      // period.current = timer.periods[timer.currentPeriod];
-    },
-    timer.running ? 1000 : null
-  );
-
-  const start = () => {
-    if (
-      !timer.running &&
-      (!period.current || !isPeriodComplete(period.current))
-    ) {
-      setTimer({
-        currentPeriod: timer.currentPeriod ?? 0,
-        running: true,
-      });
-    }
-  };
-
-  const stop = () => {
-    setTimer({ running: false });
-  };
-
-  return {
-    timer,
-    period: period.current,
-    start,
-    stop,
-  };
+  // const [timer, setTimer] = useReduction<PomodoroTimer>(
+  //   initialTimer ?? {
+  //     running: false,
+  //     periods: [
+  //       {
+  //         title: "Focus Period",
+  //         duration: { hours: 0, minutes: 0, seconds: 5 },
+  //       },
+  //     ],
+  //   }
+  // );
+  // const period = useRef<PomodoroPeriod>(timer.periods[0]);
+  // useEffect(() => {
+  //   period.current = timer.periods[timer.currentPeriod];
+  // }, [timer]);
+  // useInterval(
+  //   () => {
+  //     const remainingTime = decrementDuration(
+  //       timer.periods[timer.currentPeriod ?? 0].remainingTime ??
+  //         timer.periods[timer.currentPeriod ?? 0].duration
+  //     );
+  //     console.log("ran");
+  //     setTimer({
+  //       periods: timer.periods.map((p, i) =>
+  //         i === timer.currentPeriod ? { ...p, remainingTime } : p
+  //       ),
+  //       running: !isPeriodComplete(timer.periods[timer.currentPeriod ?? 0]),
+  //     });
+  //     // period.current = timer.periods[timer.currentPeriod];
+  //   },
+  //   timer.running ? 1000 : null
+  // );
+  // const start = () => {
+  //   if (
+  //     !timer.running &&
+  //     (!period.current || !isPeriodComplete(period.current))
+  //   ) {
+  //     setTimer({
+  //       currentPeriod: timer.currentPeriod ?? 0,
+  //       running: true,
+  //     });
+  //   }
+  // };
+  // const stop = () => {
+  //   setTimer({ running: false });
+  // };
+  // return {
+  //   timer,
+  //   period: period.current,
+  //   start,
+  //   stop,
+  // };
 };
 
 export default usePomodoro;

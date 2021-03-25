@@ -4,9 +4,20 @@ import twindConfig from "../twind.config";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  backgrounds: {
+    default: "pomodoro",
+    values: [
+      {
+        name: "pomodoro",
+        value: "#640d14",
+      },
+    ],
+  },
 };
 
 export const decorators = [
+  withDesign,
+  (Story) => withTwindStory(twindConfig, <Story />),
   (Story) => (
     <>
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -21,6 +32,4 @@ export const decorators = [
       <Story />
     </>
   ),
-  withDesign,
-  (Story) => withTwindStory(twindConfig, <Story />),
 ];

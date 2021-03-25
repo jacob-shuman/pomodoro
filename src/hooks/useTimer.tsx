@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import useInterval from "@use-it/interval";
 import { useReduction } from "./useReduction";
 
@@ -76,9 +76,8 @@ export const tick = (
     }),
   };
 
-  onTick?.(updatedState.elapsedTime);
-
   setState(updatedState);
+  onTick?.(updatedState.elapsedTime);
 };
 
 export const useTimer = (
@@ -104,7 +103,7 @@ export const useTimer = (
     }) ??
       DEFAULT_TIMER_STATE
   );
-  const { hasStarted, isRunning, elapsedTime } = state;
+  const { isRunning, elapsedTime } = state;
   const onTick = useCallback(
     (elapsedTime: TimerDuration) => options?.onTick?.(elapsedTime),
     [options?.onTick]
@@ -126,16 +125,22 @@ export const useTimer = (
     setState({ hasStarted: true, isRunning: true });
   };
 
-  const stop = () => {
+  const pause = () => {
     setState({ isRunning: false });
   };
 
-  const toggle = isRunning ? stop : start;
+  const toggle = isRunning ? pause : start;
 
-  const reset = () => {
+  const stop = () => {
     setState({
       hasStarted: false,
       isRunning: false,
+      elapsedTime: { hours: 0, minutes: 0, seconds: 0 },
+    });
+  };
+
+  const reset = () => {
+    setState({
       elapsedTime: { hours: 0, minutes: 0, seconds: 0 },
     });
   };
@@ -162,7 +167,7 @@ export const useTimer = (
     isRunning ? 1000 : null
   );
 
-  return { ...state, start, stop, toggle, reset, set, skip, rewind };
+  return { ...state, start, pause, toggle, stop, reset, set, skip, rewind };
 };
 
 export default useTimer;
