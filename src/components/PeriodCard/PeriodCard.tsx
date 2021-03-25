@@ -11,9 +11,11 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
   active,
   children,
   time,
+  ...props
 }) => {
   return (
     <button
+      {...props}
       className={tw(
         active
           ? "bg-tomato-deep-idle text-tomato-light-idle hover:(text-tomato-light-hover bg-tomato-deep-hover) active:(text-tomato-light-active bg-tomato-deep-active)"

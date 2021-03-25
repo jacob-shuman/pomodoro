@@ -11,7 +11,7 @@ import { useState } from "react";
 import usePomodoro from "../hooks/usePomodoro";
 import { getHumanReadableDuration } from "../utils/timer";
 
-const DesignPage: React.FC = () => {
+const HomePage: React.FC = () => {
   const [tab, setTab] = useState<"queue" | "settings">("queue");
   const pomodoro = usePomodoro();
 
@@ -35,10 +35,15 @@ const DesignPage: React.FC = () => {
         {tab === "queue" && pomodoro.periods && pomodoro.periods.length > 0 && (
           <ul className={tw`flex flex-col space-y-4`}>
             {pomodoro.periods.map((p, i) => (
-              <li>
+              <li key={p.title + i}>
                 <PeriodCard
                   active={pomodoro.period === i}
                   time={getHumanReadableDuration(p.duration)}
+                  onClick={() => {
+                    if (pomodoro.period !== i) {
+                      pomodoro.setPeriod(i);
+                    }
+                  }}
                 >
                   {p.title}
                 </PeriodCard>
@@ -99,4 +104,4 @@ const DesignPage: React.FC = () => {
   );
 };
 
-export default DesignPage;
+export default HomePage;

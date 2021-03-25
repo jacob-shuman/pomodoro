@@ -99,13 +99,23 @@ export default function Home() {
     return 100;
   };
 
+  const updatePeriod = (periodData: Partial<PomodoroPeriod>) => {
+    setPeriods(
+      periods.map((p, i) => (i === period ? { ...p, ...periodData } : p))
+    );
+  };
+
   return {
     hasStarted: timer.hasStarted,
     isRunning: timer.isRunning,
 
     getPercentCompleted,
-    period,
     periods,
+    period,
+    setPeriod: (period: number) => {
+      updatePeriod({ remaining: undefined });
+      setPeriod(period);
+    },
     addPeriod,
     toggle,
     stop,
