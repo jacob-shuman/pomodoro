@@ -7,6 +7,7 @@ export enum ThemeBackgroundImage {
 
 export interface Theme {
   title: string;
+  highlight: string;
   ring: string;
   button: {
     text: {
@@ -24,5 +25,6 @@ export interface Theme {
   background: {
     color: string;
     image: ThemeBackgroundImage;
+    blurAngle: number;
   };
 }

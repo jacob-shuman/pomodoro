@@ -38,6 +38,7 @@ export const ThemeColor = {
 export const DEFAULT_THEME: { [key: string]: Theme } = {
   POMODORO_RED: {
     title: "Pomodoro Red",
+    highlight: ThemeColor.peach.idle,
     ring: ThemeColor.tomato.bright.active,
     button: {
       text: {
@@ -55,10 +56,12 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     background: {
       color: ThemeColor.tomato.dark.idle,
       image: ThemeBackgroundImage.random,
+      blurAngle: 140,
     },
   },
   ANTHO_BLUE: {
     title: "Antho Blue",
+    highlight: "#2430D9",
     ring: "#2430D9",
     button: {
       text: {
@@ -76,6 +79,7 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     background: {
       color: "#111766",
       image: ThemeBackgroundImage.random,
+      blurAngle: 140,
     },
   },
 };

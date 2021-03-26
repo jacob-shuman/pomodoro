@@ -1,10 +1,16 @@
-import useTimer from "../hooks/useTimer";
+import useTimer from "./useTimer/useTimer";
 import { decrementDuration } from "../utils/timer";
 import { useState } from "react";
 import { PomodoroPeriod } from "../models/pomodoro";
 import { isDurationComplete } from "../utils/timer";
 
-export default function usePomodoro() {
+export default function usePomodoro(
+  options?: Partial<{
+    onStart: () => void;
+    onPause: () => void;
+    onStop: () => void;
+  }>
+) {
   const [isFinished, setIsFinished] = useState(false);
   const [looping, setLooping] = useState(true); //TODO: switch to false
   const [periods, setPeriods] = useState<PomodoroPeriod[]>([
@@ -39,6 +45,7 @@ export default function usePomodoro() {
     periods[period]?.remaining ?? periods[period].duration;
 
   const timer = useTimer({
+    ...options,
     onTick: () => {
       const remaining = decrementDuration(getRemainingTime());
 
@@ -66,6 +73,7 @@ export default function usePomodoro() {
     timer.stop();
     setPeriod(0);
     setPeriods(periods.map((p) => ({ ...p, remaining: undefined })));
+    options.onStop?.();
   };
 
   const addPeriod = (newPeriod: PomodoroPeriod) => {

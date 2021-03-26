@@ -10,8 +10,9 @@ const Layout: React.FC = ({ children }) => {
   const { theme } = useTheme();
   return (
     <main
+      // TODO: background-image is causing a client/server mismatch
       className={tw(
-        "h-screen",
+        tw`h-screen bg-repeat`,
         css`
           background-color: ${theme.background.color};
           background-image: ${getThemeBackgroundImage(theme.background.image)};
@@ -23,27 +24,27 @@ const Layout: React.FC = ({ children }) => {
           "h-full",
           css`
         ::-moz-selection {
-          background: #f06543;
+          background: ${theme.highlight};
         }
         ::-webkit-selection {
-          background: #f06543;
+          background: ${theme.highlight};
         }
         ::selection {
-          background: #f06543;
+          background: ${theme.highlight};
         }
         background: rgb(${theme.background.color});
         background: -moz-linear-gradient(
-          140deg,
+          ${theme.background.blurAngle}deg,
           rgba(${getRgb(theme.background.color)}, 1) 0%,
           rgba(${getRgb(theme.background.color)}, 0.95) 100%
         );
         background: -webkit-linear-gradient(
-          140deg,
+          ${theme.background.blurAngle}deg,
           rgba(${getRgb(theme.background.color)}, 1) 0%,
           rgba(${getRgb(theme.background.color)}, 0.95) 100%
         );
         background: linear-gradient(
-          140deg,
+          ${theme.background.blurAngle}deg,
           rgba(${getRgb(theme.background.color)}, 1) 0%,
           rgba(${getRgb(theme.background.color)}, 0.95) 100%
         );

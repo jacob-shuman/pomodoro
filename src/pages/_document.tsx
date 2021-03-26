@@ -10,7 +10,7 @@ class Document extends NextDocument {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" style={{ height: "100%", width: "100%", margin: 0 }}>
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
@@ -23,7 +23,7 @@ class Document extends NextDocument {
           />
         </Head>
 
-        <body>
+        <body style={{ height: "100%", width: "100%", margin: 0 }}>
           <Main />
 
           <NextScript />

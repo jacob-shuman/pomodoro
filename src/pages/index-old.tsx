@@ -1,5 +1,5 @@
 import { tw } from "twind";
-import useTimer, { TimerDuration } from "../hooks/useTimer";
+import useTimer, { TimerDuration } from "../hooks/useTimer/useTimer";
 import Button from "../components/Button/Button";
 import { decrementDuration } from "../utils/timer";
 import { useState } from "react";

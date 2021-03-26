@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import useInterval from "@use-it/interval";
-import { useReduction } from "./useReduction";
+import { useReduction } from "../useReduction";
 
 export interface TimerDuration {
   hours: number;
@@ -16,6 +16,10 @@ export interface TimerDurationCallbacks {
 
 export interface TimerCallbacks extends TimerDurationCallbacks {
   onTick: (elapsedTime: TimerDuration) => void;
+  onStart: (elapsedTime: TimerDuration) => void;
+  onPause: (elapsedTime: TimerDuration) => void;
+  onStop: (elapsedTime: TimerDuration) => void;
+  onReset: (elapsedTime: TimerDuration) => void;
 }
 
 export interface TimerState {
@@ -120,13 +124,31 @@ export const useTimer = (
     (elapsedTime: TimerDuration) => options?.onSecond?.(elapsedTime),
     [options?.onSecond]
   );
+  const onStart = useCallback(
+    (elapsedTime: TimerDuration) => options?.onStart?.(elapsedTime),
+    [options?.onStart]
+  );
+  const onPause = useCallback(
+    (elapsedTime: TimerDuration) => options?.onPause?.(elapsedTime),
+    [options?.onPause]
+  );
+  const onStop = useCallback(
+    (elapsedTime: TimerDuration) => options?.onStop?.(elapsedTime),
+    [options?.onStop]
+  );
+  const onReset = useCallback(
+    (elapsedTime: TimerDuration) => options?.onReset?.(elapsedTime),
+    [options?.onReset]
+  );
 
   const start = () => {
     setState({ hasStarted: true, isRunning: true });
+    onStart?.(elapsedTime);
   };
 
   const pause = () => {
     setState({ isRunning: false });
+    onPause?.(elapsedTime);
   };
 
   const toggle = isRunning ? pause : start;
@@ -137,12 +159,14 @@ export const useTimer = (
       isRunning: false,
       elapsedTime: { hours: 0, minutes: 0, seconds: 0 },
     });
+    onStop?.(elapsedTime);
   };
 
   const reset = () => {
     setState({
       elapsedTime: { hours: 0, minutes: 0, seconds: 0 },
     });
+    onReset?.(elapsedTime);
   };
 
   // TODO: Validate that seconds/minutes is less than 60 and update accordingly
@@ -163,7 +187,17 @@ export const useTimer = (
   };
 
   useInterval(
-    () => tick(elapsedTime, setState, { onHour, onMinute, onSecond, onTick }),
+    () =>
+      tick(elapsedTime, setState, {
+        onHour,
+        onMinute,
+        onSecond,
+        onTick,
+        onStart,
+        onPause,
+        onStop,
+        onReset,
+      }),
     isRunning ? 1000 : null
   );
 

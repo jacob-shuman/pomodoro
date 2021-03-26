@@ -7,11 +7,22 @@ import {
   IoHelpCircle,
   IoCopy,
   IoLogoGithub,
+  IoMusicalNote,
+  IoPerson,
 } from "react-icons/io5";
 import { tw } from "twind";
 
 export interface IconProps extends IconBaseProps {
-  name: "skip" | "play" | "pause" | "rewind" | "help" | "copy" | "github";
+  name:
+    | "skip"
+    | "play"
+    | "pause"
+    | "rewind"
+    | "help"
+    | "copy"
+    | "github"
+    | "music"
+    | "person";
 }
 
 const Icon: React.FC<IconProps> = ({ name, ...props }) => {
@@ -32,6 +43,10 @@ const Icon: React.FC<IconProps> = ({ name, ...props }) => {
       return <IoCopy {...props} className={additionalProps} />;
     case "github":
       return <IoLogoGithub {...props} className={additionalProps} />;
+    case "music":
+      return <IoMusicalNote {...props} className={additionalProps} />;
+    case "person":
+      return <IoPerson {...props} className={additionalProps} />;
   }
 };
 
