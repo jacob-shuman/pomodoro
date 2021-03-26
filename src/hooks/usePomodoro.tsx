@@ -10,7 +10,7 @@ export default function usePomodoro() {
   const [periods, setPeriods] = useState<PomodoroPeriod[]>([
     {
       title: "Focus",
-      duration: { hours: 0, minutes: 20, seconds: 0 },
+      duration: { hours: 0, minutes: 25, seconds: 0 },
     },
     {
       title: "Short Break",
@@ -18,7 +18,7 @@ export default function usePomodoro() {
     },
     {
       title: "Focus",
-      duration: { hours: 0, minutes: 20, seconds: 0 },
+      duration: { hours: 0, minutes: 25, seconds: 0 },
     },
     {
       title: "Short Break",
@@ -26,7 +26,7 @@ export default function usePomodoro() {
     },
     {
       title: "Focus",
-      duration: { hours: 0, minutes: 20, seconds: 0 },
+      duration: { hours: 0, minutes: 25, seconds: 0 },
     },
     {
       title: "Long Break",
@@ -47,6 +47,8 @@ export default function usePomodoro() {
       );
 
       if (isDurationComplete(remaining)) {
+        resetPeriod();
+
         if (period >= periods.length - 1) {
           stop();
 

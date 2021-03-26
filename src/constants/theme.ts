@@ -41,10 +41,12 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
-        inactive: ThemeColor.tomato.light.idle,
+        inactive: ThemeColor.tomato.medium.idle,
       },
     },
+    progress: ThemeColor.tomato.bright.idle,
     background: {
+      color: ThemeColor.tomato.dark.idle,
       image: THEME_BACKGROUND_IMAGE.RANDOM,
     },
   },
@@ -56,7 +58,9 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
         inactive: ThemeColor.tomato.light.idle,
       },
     },
+    progress: "#2430D9",
     background: {
+      color: "#111766",
       image: THEME_BACKGROUND_IMAGE.RANDOM,
     },
   },

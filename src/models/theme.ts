@@ -12,7 +12,9 @@ export interface Theme {
       inactive: string;
     };
   };
+  progress: string;
   background: {
+    color: string;
     image: THEME_BACKGROUND_IMAGE;
   };
 }

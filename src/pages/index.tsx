@@ -6,20 +6,18 @@ import {
 import Button from "../components/Button/Button";
 import Icon from "../components/Icon/Icon";
 import ButtonRow from "../components/ButtonRow/ButtonRow";
+import Title from "../components/Title/Title";
 import PeriodCard from "../components/PeriodCard/PeriodCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import usePomodoro from "../hooks/usePomodoro";
 import { getHumanReadableDuration } from "../utils/timer";
 import { useTheme } from "../hooks/useTheme";
+import { DEFAULT_THEME } from "../constants/theme";
 
 const HomePage: React.FC = () => {
   const [tab, setTab] = useState<"queue" | "settings">("queue");
   const pomodoro = usePomodoro();
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    console.log("theme: ", theme);
-  }, []);
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className={tw`flex items-center justify-center h-full space-x-32`}>
@@ -59,25 +57,48 @@ const HomePage: React.FC = () => {
         )}
 
         {tab === "settings" && (
-          <>
-            <h1>Sync</h1>
-            <h1>Theme</h1>
+          <div className={tw`text-left`}>
+            <Title>General</Title>
+            <Button active onClick={() => pomodoro.toggleLooping()}>
+              {pomodoro.looping ? "Disable" : "Enable"} Looping
+            </Button>
+
+            <div className={tw`flex items-center align-middle space-x-4`}>
+              <Title>Sync</Title>
+
+              <Button icon>
+                <Icon className={tw``} name="help" />
+              </Button>
+            </div>
+
+            <Title>Theme</Title>
             <ButtonRow>
-              <Button active>Red</Button>
-              <Button>Blue</Button>
-              <Button>Green</Button>
+              <Button
+                onClick={() => {
+                  setTheme(DEFAULT_THEME.POMODORO_RED);
+                }}
+              >
+                Red
+              </Button>
+              <Button
+                onClick={() => {
+                  setTheme(DEFAULT_THEME.ANTHO_BLUE);
+                }}
+              >
+                Blue
+              </Button>
             </ButtonRow>
-          </>
+          </div>
         )}
       </section>
 
       <section className={tw`flex flex-col space-y-16 items-center`}>
         <CircularProgressbarWithChildren
-          className={tw`w-96`}
+          className={tw`w-96 duration-300 ease-in-out transition-colors`}
           counterClockwise
           value={pomodoro.getPercentCompleted()}
           styles={buildStyles({
-            pathColor: "#D92430",
+            pathColor: theme.progress,
             trailColor: "transparent",
           })}
         >

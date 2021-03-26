@@ -20,8 +20,8 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       {...props}
       className={tw(
-        "rounded-xl font-raleway font-bold duration-300 ease-in-out transition transform hover:scale-105 active:scale-95",
-        "focus:(outline-none ring-2 ring-offset-2 ring-offset-transparent ring-tomato-bright-active) hover:(outline-none ring-2 ring-offset-2 ring-offset-transparent ring-tomato-bright-active)",
+        `rounded-xl font-raleway font-bold duration-300 ease-in-out transition transform hover:scale-105 active:scale-95`,
+        "focus:(outline-none ring(2 offset-2 offset-transparent tomato-bright-active)) hover:(outline-none ring(2 offset-2 offset-transparent tomato-bright-active))",
 
         icon
           ? "h-16 w-16 focus:(text-tomato-light-hover) hover:(text-tomato-light-idle) active:(bg-tomato-bright-active)"

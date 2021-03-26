@@ -4,12 +4,13 @@ import {
   IoPlay,
   IoPause,
   IoPlaySkipBack,
+  IoHelpCircle,
   IoCopy,
 } from "react-icons/io5";
 import { tw } from "twind";
 
 export interface IconProps extends IconBaseProps {
-  name: "skip" | "play" | "pause" | "rewind" | "copy";
+  name: "skip" | "play" | "pause" | "rewind" | "help" | "copy";
 }
 
 const Icon: React.FC<IconProps> = ({ name, ...props }) => {
@@ -24,6 +25,8 @@ const Icon: React.FC<IconProps> = ({ name, ...props }) => {
       return <IoPause {...props} className={additionalProps} />;
     case "rewind":
       return <IoPlaySkipBack {...props} className={additionalProps} />;
+    case "help":
+      return <IoHelpCircle {...props} className={additionalProps} />;
     case "copy":
       return <IoCopy {...props} className={additionalProps} />;
   }

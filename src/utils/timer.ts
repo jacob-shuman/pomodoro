@@ -7,15 +7,15 @@ export const isDurationComplete = (duration: TimerDuration) =>
   duration.seconds === 0;
 
 export const decrementDuration = (duration: TimerDuration): TimerDuration => {
-  if (duration.seconds > 1) {
+  if (duration.seconds > 0) {
     return { ...duration, seconds: duration.seconds - 1 };
   }
 
-  if (duration.minutes > 1) {
+  if (duration.minutes > 0) {
     return { ...duration, minutes: duration.minutes - 1, seconds: 59 };
   }
 
-  if (duration.hours > 1) {
+  if (duration.hours > 0) {
     return {
       hours: duration.hours - 1,
       minutes: 59,
