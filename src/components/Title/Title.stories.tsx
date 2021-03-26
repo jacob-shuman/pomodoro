@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import Title, { TitleProps } from "./Title";
+import Title from "./Title";
 
 export default {
   title: "Components/Title",
@@ -14,5 +14,5 @@ export default {
   },
 } as Meta;
 
-export const TitleText: Story<TitleProps> = (args) => <Title {...args} />;
+export const TitleText: Story = (args) => <Title {...args} />;
 TitleText.args = { children: "Title", active: true };

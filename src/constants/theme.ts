@@ -1,4 +1,4 @@
-import { Theme, THEME_BACKGROUND_IMAGE } from "../models/theme";
+import { Theme, ThemeBackgroundImage } from "../models/theme";
 
 export const ThemeColor = {
   tomato: {
@@ -38,30 +38,40 @@ export const ThemeColor = {
 export const DEFAULT_THEME: { [key: string]: Theme } = {
   POMODORO_RED: {
     title: "Pomodoro Red",
+    ring: ThemeColor.tomato.bright.active,
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
         inactive: ThemeColor.tomato.medium.idle,
       },
+      background: {
+        active: ThemeColor.tomato.bright.active,
+        idle: ThemeColor.tomato.bright.idle,
+      },
     },
     progress: ThemeColor.tomato.bright.idle,
     background: {
       color: ThemeColor.tomato.dark.idle,
-      image: THEME_BACKGROUND_IMAGE.RANDOM,
+      image: ThemeBackgroundImage.random,
     },
   },
   ANTHO_BLUE: {
     title: "Antho Blue",
+    ring: "#2430D9",
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
         inactive: ThemeColor.tomato.light.idle,
       },
+      background: {
+        active: "#2529AC",
+        idle: "#111766",
+      },
     },
     progress: "#2430D9",
     background: {
       color: "#111766",
-      image: THEME_BACKGROUND_IMAGE.RANDOM,
+      image: ThemeBackgroundImage.solid,
     },
   },
 };

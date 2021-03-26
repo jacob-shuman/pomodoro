@@ -8,11 +8,13 @@ import Icon from "../components/Icon/Icon";
 import ButtonRow from "../components/ButtonRow/ButtonRow";
 import Title from "../components/Title/Title";
 import PeriodCard from "../components/PeriodCard/PeriodCard";
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import usePomodoro from "../hooks/usePomodoro";
 import { getHumanReadableDuration } from "../utils/timer";
 import { useTheme } from "../hooks/useTheme";
 import { DEFAULT_THEME } from "../constants/theme";
+import { ThemeBackgroundImage } from "../models/theme";
+import { getThemeBackgroundImageName } from "../utils/theme";
 
 const HomePage: React.FC = () => {
   const [tab, setTab] = useState<"queue" | "settings">("queue");
@@ -71,23 +73,43 @@ const HomePage: React.FC = () => {
               </Button>
             </div>
 
-            <Title>Theme</Title>
-            <ButtonRow>
-              <Button
-                onClick={() => {
-                  setTheme(DEFAULT_THEME.POMODORO_RED);
-                }}
-              >
-                Red
-              </Button>
-              <Button
-                onClick={() => {
-                  setTheme(DEFAULT_THEME.ANTHO_BLUE);
-                }}
-              >
-                Blue
-              </Button>
-            </ButtonRow>
+            <div className={tw`flex flex-col space-y-8`}>
+              <Title>Theme</Title>
+              <div className={tw`flex flex-col items-center space-y-4`}>
+                <ButtonRow>
+                  <Button
+                    onClick={() => {
+                      setTheme(DEFAULT_THEME.POMODORO_RED);
+                    }}
+                  >
+                    Red
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setTheme(DEFAULT_THEME.ANTHO_BLUE);
+                    }}
+                  >
+                    Blue
+                  </Button>
+                </ButtonRow>
+
+                <ButtonRow>
+                  <Button
+                    onClick={() => {
+                      setTheme({
+                        ...theme,
+                        background: {
+                          ...theme.background,
+                          image: ThemeBackgroundImage.random,
+                        },
+                      });
+                    }}
+                  >
+                    Randomize Background
+                  </Button>
+                </ButtonRow>
+              </div>
+            </div>
           </div>
         )}
       </section>

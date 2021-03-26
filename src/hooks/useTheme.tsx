@@ -53,6 +53,7 @@ export function ThemeProvider({
   const [_themeState, _setThemeState] = useState(theme);
 
   const setThemeState = (themeState: ThemeState) => {
+    // TODO: Re-enable this once themes are setup
     // window.localStorage.setItem(
     //   LOCAL_STORAGE.THEME,
     //   JSON.stringify(_buildThemeState(themeState.theme))
