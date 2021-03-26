@@ -3,8 +3,7 @@ import twindConfig from "../../twind.config";
 import { tw, css } from "twind/css";
 import { useTheme, ThemeProvider } from "../hooks/useTheme";
 import "react-circular-progressbar/dist/styles.css";
-import { useEffect } from "react";
-import { getRgb, getThemeBackgroundImage } from "../utils/theme";
+import { getRgb, getBackgroundThemeImage } from "../utils/theme";
 
 const Layout: React.FC = ({ children }) => {
   const { theme } = useTheme();
@@ -15,7 +14,7 @@ const Layout: React.FC = ({ children }) => {
         tw`h-screen bg-repeat`,
         css`
           background-color: ${theme.background.color};
-          background-image: ${getThemeBackgroundImage(theme.background.image)};
+          background-image: ${getBackgroundThemeImage(theme.background.image)};
         `
       )}
     >

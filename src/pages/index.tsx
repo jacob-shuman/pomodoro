@@ -11,8 +11,8 @@ import { getHumanReadableDuration } from "../utils/timer";
 import { useAudio } from "../hooks/useAudio";
 import { useTheme } from "../hooks/useTheme";
 import { DEFAULT_THEME } from "../constants/theme";
-import { ThemeBackgroundImage } from "../models/theme";
-import { getRgb, getThemeBackgroundImageName } from "../utils/theme";
+import { BackgroundThemeImage } from "../models/theme";
+import { getRgb, getBackgroundThemeImageName } from "../utils/theme";
 import { useRouter } from "next/router";
 
 const HomePage: React.FC = () => {
@@ -106,7 +106,11 @@ const HomePage: React.FC = () => {
                 <Title>Sync</Title>
 
                 <Button icon>
-                  <Icon className={tw``} name="help" />
+                  <Icon className={tw``} name="checkbox" />
+                </Button>
+
+                <Button icon>
+                  <Icon className={tw``} name="checkbox-outline" />
                 </Button>
               </div>
 
@@ -137,7 +141,7 @@ const HomePage: React.FC = () => {
                           ...theme,
                           background: {
                             ...theme.background,
-                            image: ThemeBackgroundImage.random,
+                            image: BackgroundThemeImage.random,
                           },
                         });
                       }}
@@ -156,12 +160,15 @@ const HomePage: React.FC = () => {
               </div>
 
               <div className={tw`flex flex-col space-y-8`}>
-                <Title>Other</Title>
+                <Title>About</Title>
 
                 <div className={tw`flex flex-col items-center space-y-4`}>
                   <Button
                     className={tw`flex items-center space-x-4`}
                     onClick={() => {
+                      {
+                        /* TODO: Use links instead of router */
+                      }
                       router.replace(
                         "https://github.com/jacob-shuman/pomodoro"
                       );
@@ -173,6 +180,9 @@ const HomePage: React.FC = () => {
                   <Button
                     className={tw`flex items-center space-x-4`}
                     onClick={() => {
+                      {
+                        /* TODO: Use links instead of router */
+                      }
                       router.replace("https://kenney.nl");
                     }}
                   >
@@ -182,6 +192,9 @@ const HomePage: React.FC = () => {
                   <Button
                     className={tw`flex items-center space-x-4`}
                     onClick={() => {
+                      {
+                        /* TODO: Use links instead of router */
+                      }
                       router.replace("https://jacob-shuman.ca");
                     }}
                   >

@@ -9,6 +9,8 @@ import {
   IoLogoGithub,
   IoMusicalNote,
   IoPerson,
+  IoCheckbox,
+  IoCheckboxOutline,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -22,7 +24,9 @@ export interface IconProps extends IconBaseProps {
     | "copy"
     | "github"
     | "music"
-    | "person";
+    | "person"
+    | "checkbox"
+    | "checkbox-outline";
 }
 
 const Icon: React.FC<IconProps> = ({ name, ...props }) => {
@@ -47,6 +51,10 @@ const Icon: React.FC<IconProps> = ({ name, ...props }) => {
       return <IoMusicalNote {...props} className={additionalProps} />;
     case "person":
       return <IoPerson {...props} className={additionalProps} />;
+    case "checkbox":
+      return <IoCheckbox {...props} className={additionalProps} />;
+    case "checkbox-outline":
+      return <IoCheckboxOutline {...props} className={additionalProps} />;
   }
 };
 

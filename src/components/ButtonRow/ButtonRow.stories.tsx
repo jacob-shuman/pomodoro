@@ -16,7 +16,7 @@ export default {
 } as Meta;
 
 export const ButtonRow: Story<ButtonRowProps> = (args) => (
-  <ButtonRow {...args} />
+  <_ButtonRow {...args} />
 );
 ButtonRow.args = {
   children: <Button>Button 1</Button>,

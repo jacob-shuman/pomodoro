@@ -1,4 +1,4 @@
-import { ThemeBackgroundImage } from "../models/theme";
+import { BackgroundThemeImage } from "../models/theme";
 
 // HEX2RGB (renamed to getRgb) function created by comficker - https://gist.github.com/comficker/871d378c535854c1c460f7867a191a5a#file-hex2rgb-js
 export function getRgb(hex: string) {
@@ -31,33 +31,33 @@ export function getRgb(hex: string) {
   return `${r}, ${g}, ${b}`;
 }
 
-export function getThemeBackgroundImageName(image: ThemeBackgroundImage) {
+export function getBackgroundThemeImageName(image: BackgroundThemeImage) {
   switch (image) {
-    case ThemeBackgroundImage.solid:
+    case BackgroundThemeImage.solid:
       return "Solid";
-    case ThemeBackgroundImage.tic_tac_toe:
+    case BackgroundThemeImage.tic_tac_toe:
       return "Tic Tac Toe";
-    case ThemeBackgroundImage.overlapping_circles:
+    case BackgroundThemeImage.overlapping_circles:
       return "Overlapping Circles";
     default:
       return "Random";
   }
 }
 
-export function getThemeBackgroundImage(image: ThemeBackgroundImage) {
+export function getBackgroundThemeImage(image: BackgroundThemeImage) {
   switch (image) {
-    case ThemeBackgroundImage.solid:
+    case BackgroundThemeImage.solid:
       return "transparent";
-    case ThemeBackgroundImage.tic_tac_toe:
+    case BackgroundThemeImage.tic_tac_toe:
       return `url("data:image/svg+xml,%3Csvg width='128' height='128' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z' fill='%23ffffff' fill-opacity='0.5' fill-rule='evenodd'/%3E%3C/svg%3E")`;
-    case ThemeBackgroundImage.overlapping_circles:
+    case BackgroundThemeImage.overlapping_circles:
       return `url("data:image/svg+xml,%3Csvg width='128' height='128' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.5'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`;
     default:
-      return getThemeBackgroundImage(
-        ThemeBackgroundImage[
-          Object.keys(ThemeBackgroundImage)[
+      return getBackgroundThemeImage(
+        BackgroundThemeImage[
+          Object.keys(BackgroundThemeImage)[
             Math.floor(
-              Math.random() * (Object.keys(ThemeBackgroundImage).length - 1)
+              Math.random() * (Object.keys(BackgroundThemeImage).length - 1)
             )
           ]
         ]

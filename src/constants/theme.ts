@@ -1,4 +1,4 @@
-import { Theme, ThemeBackgroundImage } from "../models/theme";
+import { Theme, BackgroundThemeImage } from "../models/theme";
 
 export const ThemeColor = {
   tomato: {
@@ -55,7 +55,7 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     progress: ThemeColor.tomato.bright.idle,
     background: {
       color: ThemeColor.tomato.dark.idle,
-      image: ThemeBackgroundImage.random,
+      image: BackgroundThemeImage.random,
       blurAngle: 140,
     },
   },
@@ -78,7 +78,7 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     progress: "#2430D9",
     background: {
       color: "#111766",
-      image: ThemeBackgroundImage.random,
+      image: BackgroundThemeImage.random,
       blurAngle: 140,
     },
   },
