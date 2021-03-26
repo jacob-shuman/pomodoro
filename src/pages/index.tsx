@@ -15,8 +15,10 @@ import { useTheme } from "../hooks/useTheme";
 import { DEFAULT_THEME } from "../constants/theme";
 import { ThemeBackgroundImage } from "../models/theme";
 import { getThemeBackgroundImageName } from "../utils/theme";
+import { useRouter } from "next/router";
 
 const HomePage: React.FC = () => {
+  const router = useRouter();
   const [tab, setTab] = useState<"queue" | "settings">("queue");
   const pomodoro = usePomodoro();
   const { theme, setTheme } = useTheme();
@@ -59,7 +61,7 @@ const HomePage: React.FC = () => {
         )}
 
         {tab === "settings" && (
-          <div className={tw`text-left`}>
+          <div className={tw`flex-col space-y-4 text-left`}>
             <Title>General</Title>
             <Button active onClick={() => pomodoro.toggleLooping()}>
               {pomodoro.looping ? "Disable" : "Enable"} Looping
@@ -106,6 +108,26 @@ const HomePage: React.FC = () => {
                     }}
                   >
                     Randomize Background
+                  </Button>
+                </ButtonRow>
+              </div>
+            </div>
+
+            <div className={tw`flex flex-col space-y-8`}>
+              <Title>Other</Title>
+
+              <div className={tw`flex flex-col items-center space-y-4`}>
+                <ButtonRow>
+                  <Button
+                    className={tw`flex items-center space-x-4`}
+                    onClick={() => {
+                      router.replace(
+                        "https://github.com/jacob-shuman/pomodoro"
+                      );
+                    }}
+                  >
+                    <Icon name="github" />
+                    Open GitHub
                   </Button>
                 </ButtonRow>
               </div>
