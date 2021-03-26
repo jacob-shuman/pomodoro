@@ -42,11 +42,13 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
+        hover: ThemeColor.tomato.light.hover,
         inactive: ThemeColor.tomato.medium.idle,
       },
       background: {
-        active: ThemeColor.tomato.bright.active,
         idle: ThemeColor.tomato.bright.idle,
+        hover: ThemeColor.tomato.deep.hover,
+        active: ThemeColor.tomato.bright.active,
       },
     },
     progress: ThemeColor.tomato.bright.idle,
@@ -61,17 +63,19 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
+        hover: ThemeColor.tomato.light.hover,
         inactive: ThemeColor.tomato.light.idle,
       },
       background: {
-        active: "#2529AC",
         idle: "#111766",
+        hover: "#1F29BC",
+        active: "#2529AC",
       },
     },
     progress: "#2430D9",
     background: {
       color: "#111766",
-      image: ThemeBackgroundImage.solid,
+      image: ThemeBackgroundImage.random,
     },
   },
 };

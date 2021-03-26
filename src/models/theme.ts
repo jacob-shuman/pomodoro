@@ -11,11 +11,13 @@ export interface Theme {
   button: {
     text: {
       active: string;
+      hover: string;
       inactive: string;
     };
     background: {
-      active: string;
       idle: string;
+      hover: string;
+      active: string;
     };
   };
   progress: string;

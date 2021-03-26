@@ -21,10 +21,10 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
       {...props}
       className={tw(
         active
-          ? "bg-tomato-deep-idle text-tomato-light-idle hover:(text-tomato-light-hover bg-tomato-deep-hover) active:(text-tomato-light-active bg-tomato-deep-active)"
+          ? `bg-[${theme.button.background.active}] text-tomato-light-idle hover:(text-[${theme.button.text.hover}] bg-[${theme.button.background.hover}]) active:(text-tomato-light-active bg-tomato-deep-active)`
           : "bg-transparent text-tomato-medium-idle hover:(text-tomato-medium-hover) active:(text-tomato-medium-active)",
-        "px-6 py-4 w-96 rounded-xl text-xl font-poppins font-semibold focus:outline-none duration-300 ease-in-out transition transform hover:scale-105 active:scale-95",
-        `focus:(outline-none ring(2 offset-2 offset-transparent [${theme.ring}])) hover:(outline-none ring(2 offset-2 offset-transparent [${theme.button.background}]))`
+        "px-6 py-4 w-96 rounded-xl text-xl font-poppins font-semibold focus:outline-none duration-300 ease-in-out transition transform hover:scale-105 active:scale-95 ring-offset-transparent",
+        `focus:(outline-none ring(2 offset-2 [${theme.ring}])) hover:(outline-none ring(2 offset-2 [${theme.ring}]))`
       )}
     >
       <div className={tw`flex items-center justify-between`}>
