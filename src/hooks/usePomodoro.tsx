@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PomodoroPeriod } from "../models/pomodoro";
 import { isDurationComplete } from "../utils/timer";
 
-export default function Home() {
+export default function usePomodoro() {
   const [isFinished, setIsFinished] = useState(false);
   const [looping, setLooping] = useState(true); //TODO: switch to false
   const [periods, setPeriods] = useState<PomodoroPeriod[]>([
@@ -105,6 +105,20 @@ export default function Home() {
     );
   };
 
+  const resetPeriod = () => {
+    updatePeriod({ remaining: undefined });
+  };
+
+  const skip = () => {
+    resetPeriod();
+    setPeriod(period < periods.length - 1 ? period + 1 : 0);
+  };
+
+  const previous = () => {
+    resetPeriod();
+    setPeriod(period > 0 ? period - 1 : periods.length - 1);
+  };
+
   return {
     hasStarted: timer.hasStarted,
     isRunning: timer.isRunning,
@@ -112,10 +126,14 @@ export default function Home() {
     getPercentCompleted,
     periods,
     period,
+
     setPeriod: (period: number) => {
-      updatePeriod({ remaining: undefined });
+      resetPeriod();
       setPeriod(period);
     },
+    skip,
+    previous,
+
     addPeriod,
     toggle,
     stop,

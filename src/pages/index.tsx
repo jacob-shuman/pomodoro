@@ -7,13 +7,19 @@ import Button from "../components/Button/Button";
 import Icon from "../components/Icon/Icon";
 import ButtonRow from "../components/ButtonRow/ButtonRow";
 import PeriodCard from "../components/PeriodCard/PeriodCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePomodoro from "../hooks/usePomodoro";
 import { getHumanReadableDuration } from "../utils/timer";
+import { useTheme } from "../hooks/useTheme";
 
 const HomePage: React.FC = () => {
   const [tab, setTab] = useState<"queue" | "settings">("queue");
   const pomodoro = usePomodoro();
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    console.log("theme: ", theme);
+  }, []);
 
   return (
     <div className={tw`flex items-center justify-center h-full space-x-32`}>
@@ -56,6 +62,11 @@ const HomePage: React.FC = () => {
           <>
             <h1>Sync</h1>
             <h1>Theme</h1>
+            <ButtonRow>
+              <Button active>Red</Button>
+              <Button>Blue</Button>
+              <Button>Green</Button>
+            </ButtonRow>
           </>
         )}
       </section>
@@ -63,6 +74,7 @@ const HomePage: React.FC = () => {
       <section className={tw`flex flex-col space-y-16 items-center`}>
         <CircularProgressbarWithChildren
           className={tw`w-96`}
+          counterClockwise
           value={pomodoro.getPercentCompleted()}
           styles={buildStyles({
             pathColor: "#D92430",
@@ -87,7 +99,7 @@ const HomePage: React.FC = () => {
         </CircularProgressbarWithChildren>
 
         <ButtonRow>
-          <Button icon onClick={() => {}}>
+          <Button icon onClick={() => pomodoro.previous()}>
             <Icon name="rewind" />
           </Button>
 
@@ -95,7 +107,7 @@ const HomePage: React.FC = () => {
             <Icon name={pomodoro.isRunning ? "pause" : "play"} />
           </Button>
 
-          <Button icon onClick={() => {}}>
+          <Button icon onClick={() => pomodoro.skip()}>
             <Icon name="skip" />
           </Button>
         </ButtonRow>

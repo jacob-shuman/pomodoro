@@ -1,6 +1,7 @@
 import withTwindApp from "@twind/next/app";
 import twindConfig from "../../twind.config";
 import { tw, css } from "twind/css";
+import { ThemeProvider } from "../hooks/useTheme";
 import "react-circular-progressbar/dist/styles.css";
 
 function App({ Component, pageProps }) {
@@ -47,7 +48,9 @@ function App({ Component, pageProps }) {
           `
         )}
       >
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </div>
     </main>
   );
