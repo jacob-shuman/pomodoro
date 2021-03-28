@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import Button, { ButtonProps } from "./Button";
+import { Button, ButtonRow, ButtonProps } from "@components";
 
 export default {
   title: "Components/Button",
@@ -19,3 +19,14 @@ Active.args = { children: "Active", active: true };
 
 export const Inactive: Story<ButtonProps> = (args) => <Button {...args} />;
 Inactive.args = { children: "Inactive" };
+
+export const Row: Story<{ count: number }> = ({ count }) => (
+  <ButtonRow>
+    {[...Array(count > -1 ? count : 1)].map((_, i) => (
+      <Button>Button {i}</Button>
+    ))}
+  </ButtonRow>
+);
+Row.args = {
+  count: 3,
+};

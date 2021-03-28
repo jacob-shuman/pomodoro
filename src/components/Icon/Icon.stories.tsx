@@ -1,9 +1,9 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import Icon, { IconProps } from "./Icon";
+import { Icon, IconProps } from "@components";
 
 export default {
-  title: "Components/Period Card",
+  title: "Components/Icon",
   component: Icon,
   parameters: {
     design: {
@@ -14,11 +14,5 @@ export default {
   },
 } as Meta;
 
-export const Skip: Story<IconProps> = (args) => <Icon {...args} />;
-Skip.args = {};
-
-export const Play: Story<IconProps> = (args) => <Icon {...args} />;
-Play.args = {};
-
-export const Rewind: Story<IconProps> = (args) => <Icon {...args} />;
-Rewind.args = {};
+export const One: Story<IconProps> = (args) => <Icon {...args} />;
+One.args = { name: "play" };

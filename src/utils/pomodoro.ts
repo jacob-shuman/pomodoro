@@ -1,4 +1,4 @@
-import { PomodoroPeriod } from "../models/pomodoro";
+import { PomodoroPeriod } from "@models/pomodoro";
 
 export const isValidPeriod = (period: PomodoroPeriod): boolean =>
   period.duration.hours > 0 ||

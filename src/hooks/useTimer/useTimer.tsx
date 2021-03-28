@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import useInterval from "@use-it/interval";
-import { useReduction } from "../useReduction";
+import { useReduction } from "@hooks";
 
 export interface TimerDuration {
   hours: number;

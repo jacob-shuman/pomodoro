@@ -1,4 +1,4 @@
-import { TimerDuration } from "../hooks/useTimer/useTimer";
+import { TimerDuration } from "@hooks/useTimer/useTimer";
 
 export const isDurationComplete = (duration: TimerDuration) =>
   duration &&

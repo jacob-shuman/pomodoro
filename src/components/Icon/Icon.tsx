@@ -11,6 +11,8 @@ import {
   IoPerson,
   IoCheckbox,
   IoCheckboxOutline,
+  IoVolumeMute,
+  IoVolumeHigh,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -26,11 +28,13 @@ export interface IconProps extends IconBaseProps {
     | "music"
     | "person"
     | "checkbox"
-    | "checkbox-outline";
+    | "checkbox-outline"
+    | "mute"
+    | "unmute";
 }
 
-const Icon: React.FC<IconProps> = ({ name, ...props }) => {
-  const additionalProps = tw(tw`w-10 h-10 mx-auto`);
+export const Icon: React.FC<IconProps> = ({ name, ...props }) => {
+  const additionalProps = tw(props.className, tw`w-10 h-10 mx-auto`);
 
   switch (name) {
     case "skip":
@@ -55,7 +59,9 @@ const Icon: React.FC<IconProps> = ({ name, ...props }) => {
       return <IoCheckbox {...props} className={additionalProps} />;
     case "checkbox-outline":
       return <IoCheckboxOutline {...props} className={additionalProps} />;
+    case "mute":
+      return <IoVolumeMute {...props} className={additionalProps} />;
+    case "unmute":
+      return <IoVolumeHigh {...props} className={additionalProps} />;
   }
 };
-
-export default Icon;

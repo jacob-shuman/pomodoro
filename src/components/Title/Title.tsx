@@ -1,23 +1,24 @@
 import { tw } from "twind";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@hooks";
 
-const Title: React.FC<
+export const Title: React.FC<
   React.ClassAttributes<HTMLHeadingElement> &
     React.HTMLAttributes<HTMLHeadingElement>
-> = ({ children, className, ...props }) => {
-  const { theme } = useTheme();
+> = ({ children, ...props }) => {
+  const { theme, style } = useTheme();
 
   return (
     <h1
       {...props}
       className={tw(
-        className,
-        tw`text-4xl font-poppins font-bold text-[${theme.button.text.active}]`
+        props.className,
+
+        style.font.title,
+
+        tw`text-4xl font-bold text-[${theme.button.text.active}]`
       )}
     >
       {children}
     </h1>
   );
 };
-
-export default Title;

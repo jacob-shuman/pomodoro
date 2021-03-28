@@ -1,16 +1,16 @@
-import useTimer from "./useTimer/useTimer";
-import { decrementDuration } from "../utils/timer";
+import { useTimer } from "@hooks";
+import { decrementDuration } from "@utils/timer";
 import { useState } from "react";
-import { PomodoroPeriod } from "../models/pomodoro";
-import { isDurationComplete } from "../utils/timer";
+import { PomodoroPeriod } from "@models/pomodoro";
+import { isDurationComplete } from "@utils/timer";
 
-export default function usePomodoro(
+export const usePomodoro = (
   options?: Partial<{
     onStart: () => void;
     onPause: () => void;
     onStop: () => void;
   }>
-) {
+) => {
   const [isFinished, setIsFinished] = useState(false);
   const [looping, setLooping] = useState(true); //TODO: switch to false
   const [periods, setPeriods] = useState<PomodoroPeriod[]>([
@@ -151,4 +151,4 @@ export default function usePomodoro(
     looping,
     toggleLooping,
   };
-}
+};

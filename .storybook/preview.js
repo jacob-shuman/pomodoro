@@ -1,6 +1,7 @@
 import { withDesign } from "storybook-addon-designs";
 import withTwindStory from "@twind/next/app";
 import twindConfig from "../twind.config";
+import { SettingsProvider } from "../src/hooks";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -31,5 +32,10 @@ export const decorators = [
       />
       <Story />
     </>
+  ),
+  (Story) => (
+    <SettingsProvider>
+      <Story />
+    </SettingsProvider>
   ),
 ];

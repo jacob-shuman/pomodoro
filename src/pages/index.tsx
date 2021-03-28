@@ -1,51 +1,33 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { tw, css } from "twind/css";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import Button from "../components/Button/Button";
-import Icon from "../components/Icon/Icon";
-import ButtonRow from "../components/ButtonRow/ButtonRow";
-import Title from "../components/Title/Title";
-import PeriodCard from "../components/PeriodCard/PeriodCard";
-import { useEffect, useLayoutEffect, useState } from "react";
-import usePomodoro from "../hooks/usePomodoro";
-import { getHumanReadableDuration } from "../utils/timer";
-import { useAudio } from "../hooks/useAudio";
-import { useTheme } from "../hooks/useTheme";
-import { DEFAULT_THEME } from "../constants/theme";
-import { BackgroundThemeImage } from "../models/theme";
-import { getRgb, getBackgroundThemeImageName } from "../utils/theme";
-import { useRouter } from "next/router";
+import { Button, ButtonRow, Period, Icon, Title, Tabs } from "@components";
+import { getHumanReadableDuration } from "@utils/timer";
+import { useAudio, useTheme, usePomodoro, useTabs } from "@hooks";
+import { Themes } from "@constants/theme";
 
 const HomePage: React.FC = () => {
   const router = useRouter();
-  const [tab, setTab] = useState<"queue" | "settings">("queue");
+  const { tab } = useTabs();
   const audio = useAudio();
   const pomodoro = usePomodoro({
-    onStart: () => audio.play("./audio/pepSound2.ogg"),
-    onPause: () => audio.play("./audio/pepSound1.ogg"),
+    onStart: () => audio.play(audio.kit.play),
+    onPause: () => audio.play(audio.kit.pause),
   });
   const { theme, setTheme } = useTheme();
 
   return (
     <div className={tw`flex items-center justify-center h-full space-x-32`}>
       <section
-        className={tw`h-1/2 my-auto flex flex-col space-y-8 items-center`}
+        className={tw`flex flex-col items-center my-auto space-y-8 h-1/2`}
       >
-        <ButtonRow>
-          <Button active={tab === "queue"} onClick={() => setTab("queue")}>
-            Queue
-          </Button>
-          <Button
-            active={tab === "settings"}
-            onClick={() => setTab("settings")}
-          >
-            Settings
-          </Button>
-        </ButtonRow>
+        <Tabs />
 
         {/* TODO: Add gradient overlay to scroll container */}
         {/* <div
             className={tw(
-              tw`absolute w-full h-full top-0 left-0`,
+              tw`absolute top-0 left-0 w-full h-full`,
               css`
                 background: rgb(255, 255, 255);
                 background: -moz-linear-gradient(
@@ -74,12 +56,12 @@ const HomePage: React.FC = () => {
             )}
           ></div> */}
 
-        <div className={tw`py-8 px-4 overflow-y-scroll`}>
+        <div className={tw`px-4 py-8 overflow-y-scroll`}>
           {tab === "queue" && pomodoro.periods && pomodoro.periods.length > 0 && (
-            <ul className={tw`flex flex-col space-y-4`}>
+            <Period.List>
               {pomodoro.periods.map((p, i) => (
-                <li key={p.title + i}>
-                  <PeriodCard
+                <Period.ListItem key={p.title + i}>
+                  <Period.Card
                     active={pomodoro.period === i}
                     time={getHumanReadableDuration(p.duration)}
                     onClick={() => {
@@ -89,10 +71,10 @@ const HomePage: React.FC = () => {
                     }}
                   >
                     {p.title}
-                  </PeriodCard>
-                </li>
+                  </Period.Card>
+                </Period.ListItem>
               ))}
-            </ul>
+            </Period.List>
           )}
 
           {tab === "settings" && (
@@ -102,15 +84,11 @@ const HomePage: React.FC = () => {
                 {pomodoro.looping ? "Disable" : "Enable"} Looping
               </Button>
 
-              <div className={tw`flex items-center align-middle space-x-4`}>
+              <div className={tw`flex items-center space-x-4 align-middle`}>
                 <Title>Sync</Title>
 
                 <Button icon>
-                  <Icon className={tw``} name="checkbox" />
-                </Button>
-
-                <Button icon>
-                  <Icon className={tw``} name="checkbox-outline" />
+                  <Icon name="help" />
                 </Button>
               </div>
 
@@ -120,33 +98,17 @@ const HomePage: React.FC = () => {
                   <ButtonRow>
                     <Button
                       onClick={() => {
-                        setTheme(DEFAULT_THEME.POMODORO_RED);
+                        setTheme(Themes.pomodoroRed);
                       }}
                     >
                       Red
                     </Button>
                     <Button
                       onClick={() => {
-                        setTheme(DEFAULT_THEME.ANTHO_BLUE);
+                        setTheme(Themes.anthoBlue);
                       }}
                     >
                       Blue
-                    </Button>
-                  </ButtonRow>
-
-                  <ButtonRow>
-                    <Button
-                      onClick={() => {
-                        setTheme({
-                          ...theme,
-                          background: {
-                            ...theme.background,
-                            image: BackgroundThemeImage.random,
-                          },
-                        });
-                      }}
-                    >
-                      Randomize Background
                     </Button>
                   </ButtonRow>
                 </div>
@@ -208,13 +170,13 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className={tw`flex flex-col space-y-16 items-center`}>
+      <section className={tw`flex flex-col items-center space-y-16`}>
         <CircularProgressbarWithChildren
           className={tw`w-96`}
           counterClockwise
           value={pomodoro.getPercentCompleted()}
           classes={{
-            root: tw`duration-300 ease-in-out transition`,
+            root: tw`transition duration-300 ease-in-out`,
             trail: "",
             // TODO: Add stroke-linecap to theme object
             path: tw(

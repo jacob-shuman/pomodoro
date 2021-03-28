@@ -4,9 +4,9 @@ import {
   PomodoroPeriod,
   PomodoroDurationOld,
   PomodoroError,
-} from "../models/pomodoro";
-// import { decrementDuration } from "../utils/timer";
-// import { isPeriodComplete, isValidPeriod } from "../utils/pomodoro";
+} from "@models/pomodoro";
+// import { decrementDuration } from "@utils/timer";
+// import { isPeriodComplete, isValidPeriod } from "@utils/pomodoro";
 // import { useReduction } from "./useReduction";
 
 // export class PomodoroTimer {

@@ -1,8 +1,13 @@
 import { tw } from "twind";
-import Button from "../components/Button/Button";
-import usePomodoro from "../hooks/usePomodoro";
+import { Story, Meta } from "@storybook/react";
+import { Button } from "@components";
+import { usePomodoro } from "@hooks";
 
-export default function Home() {
+export default {
+  title: "Hooks/usePomodoro",
+} as Meta;
+
+export const Example: Story = () => {
   const pomodoro = usePomodoro();
 
   return (
@@ -68,4 +73,4 @@ export default function Home() {
       </section>
     </main>
   );
-}
+};

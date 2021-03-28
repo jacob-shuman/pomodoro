@@ -1,4 +1,4 @@
-import { Theme, BackgroundThemeImage } from "../models/theme";
+import { Theme, BackgroundThemeImage } from "@models/theme";
 
 export const ThemeColor = {
   tomato: {
@@ -35,8 +35,8 @@ export const ThemeColor = {
   },
 };
 
-export const DEFAULT_THEME: { [key: string]: Theme } = {
-  POMODORO_RED: {
+export const Themes: { [key: string]: Theme } = {
+  pomodoroRed: {
     title: "Pomodoro Red",
     highlight: ThemeColor.peach.idle,
     ring: ThemeColor.tomato.bright.active,
@@ -59,7 +59,7 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
       blurAngle: 140,
     },
   },
-  ANTHO_BLUE: {
+  anthoBlue: {
     title: "Antho Blue",
     highlight: "#2430D9",
     ring: "#2430D9",
@@ -83,3 +83,5 @@ export const DEFAULT_THEME: { [key: string]: Theme } = {
     },
   },
 };
+
+export const DefaultTheme = Themes.pomodoroRed;

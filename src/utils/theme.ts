@@ -1,4 +1,5 @@
-import { BackgroundThemeImage } from "../models/theme";
+import { DefaultTheme } from "@constants/theme";
+import { BackgroundThemeImage, Theme } from "@models/theme";
 
 // HEX2RGB (renamed to getRgb) function created by comficker - https://gist.github.com/comficker/871d378c535854c1c460f7867a191a5a#file-hex2rgb-js
 export function getRgb(hex: string) {
@@ -30,6 +31,11 @@ export function getRgb(hex: string) {
   }
   return `${r}, ${g}, ${b}`;
 }
+
+export const buildTheme = (theme: Theme = DefaultTheme): Theme => ({
+  ...DefaultTheme,
+  ...theme,
+});
 
 export function getBackgroundThemeImageName(image: BackgroundThemeImage) {
   switch (image) {

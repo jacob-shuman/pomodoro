@@ -1,6 +1,7 @@
 import NextDocument, { Html, Head, Main, NextScript } from "next/document";
 import withTwindDocument from "@twind/next/document";
 import twindConfig from "../../twind.config";
+import { tw } from "twind";
 
 class Document extends NextDocument {
   static async getInitialProps(ctx) {
@@ -10,7 +11,10 @@ class Document extends NextDocument {
 
   render() {
     return (
-      <Html lang="en" style={{ height: "100%", width: "100%", margin: 0 }}>
+      <Html
+        lang="en"
+        style={{ height: "100%", width: "100%", margin: 0, overflow: "hidden" }}
+      >
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
