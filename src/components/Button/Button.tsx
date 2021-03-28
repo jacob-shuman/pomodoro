@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const { theme, style } = useTheme();
+  const { theme, styles } = useTheme();
 
   return (
     <button
@@ -22,12 +22,12 @@ export const Button: React.FC<ButtonProps> = ({
       className={tw(
         props.className,
 
-        style.rounded,
-        style.transition,
-        style.transform,
-        style.focus,
-        style.hover,
-        style.font.body,
+        styles.rounded,
+        styles.transition,
+        styles.transform,
+        styles.focus,
+        styles.hover,
+        styles.font.body,
 
         icon
           ? `h-16 w-16 focus:(text-tomato-light-hover) hover:(text-tomato-light-idle) active:(bg-tomato-bright-active)`

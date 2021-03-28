@@ -10,7 +10,7 @@ export function useTheme() {
     theme,
     setTheme,
 
-    style: {
+    styles: {
       outline,
       rounded: tw`rounded-xl`,
       transition: tw`transition duration-300 ease-in-out`,

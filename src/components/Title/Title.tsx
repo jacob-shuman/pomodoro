@@ -5,7 +5,7 @@ export const Title: React.FC<
   React.ClassAttributes<HTMLHeadingElement> &
     React.HTMLAttributes<HTMLHeadingElement>
 > = ({ children, ...props }) => {
-  const { theme, style } = useTheme();
+  const { theme, styles } = useTheme();
 
   return (
     <h1
@@ -13,7 +13,7 @@ export const Title: React.FC<
       className={tw(
         props.className,
 
-        style.font.title,
+        styles.font.title,
 
         tw`text-4xl font-bold text-[${theme.button.text.active}]`
       )}

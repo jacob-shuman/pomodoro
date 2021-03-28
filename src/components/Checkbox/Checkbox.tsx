@@ -13,7 +13,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   children,
   ...props
 }) => {
-  const { theme, style } = useTheme();
+  const { theme, styles } = useTheme();
 
   return (
     <button
@@ -21,12 +21,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       className={tw(
         props.className,
 
-        style.rounded,
-        style.transition,
-        style.transform,
-        style.focus,
-        style.hover,
-        style.font.body,
+        styles.rounded,
+        styles.transition,
+        styles.transform,
+        styles.focus,
+        styles.hover,
+        styles.font.body,
 
         active
           ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}]`

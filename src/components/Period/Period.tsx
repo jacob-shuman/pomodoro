@@ -14,7 +14,7 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
   time,
   ...props
 }) => {
-  const { theme, style } = useTheme();
+  const { theme, styles } = useTheme();
 
   return (
     <button
@@ -22,12 +22,12 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
       className={tw(
         props.className,
 
-        style.rounded,
-        style.transition,
-        style.transform,
-        style.focus,
-        style.hover,
-        style.font.title,
+        styles.rounded,
+        styles.transition,
+        styles.transform,
+        styles.focus,
+        styles.hover,
+        styles.font.title,
 
         active
           ? `bg-[${theme.button.background.active}] text-tomato-light-idle hover:(text-[${theme.button.text.hover}] bg-[${theme.button.background.hover}]) active:(text-tomato-light-active bg-tomato-deep-active)`

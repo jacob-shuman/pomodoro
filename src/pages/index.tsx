@@ -9,6 +9,7 @@ import { Themes } from "@constants/theme";
 
 const HomePage: React.FC = () => {
   const router = useRouter();
+  const { styles } = useTheme();
   const { tab } = useTabs();
   const audio = useAudio();
   const pomodoro = usePomodoro({
@@ -176,7 +177,7 @@ const HomePage: React.FC = () => {
           counterClockwise
           value={pomodoro.getPercentCompleted()}
           classes={{
-            root: tw`transition duration-300 ease-in-out`,
+            root: styles.transition,
             trail: "",
             // TODO: Add stroke-linecap to theme object
             path: tw(
