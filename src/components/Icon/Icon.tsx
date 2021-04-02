@@ -13,6 +13,8 @@ import {
   IoCheckboxOutline,
   IoVolumeMute,
   IoVolumeHigh,
+  IoChevronUp,
+  IoChevronDown,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -30,7 +32,9 @@ export interface IconProps extends IconBaseProps {
     | "checkbox"
     | "checkbox-outline"
     | "mute"
-    | "unmute";
+    | "unmute"
+    | "arrow-up"
+    | "arrow-down";
 }
 
 export const Icon: React.FC<IconProps> = ({ name, ...props }) => {
@@ -63,5 +67,9 @@ export const Icon: React.FC<IconProps> = ({ name, ...props }) => {
       return <IoVolumeMute {...props} className={additionalProps} />;
     case "unmute":
       return <IoVolumeHigh {...props} className={additionalProps} />;
+    case "arrow-up":
+      return <IoChevronUp {...props} className={additionalProps} />;
+    case "arrow-down":
+      return <IoChevronDown {...props} className={additionalProps} />;
   }
 };

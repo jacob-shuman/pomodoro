@@ -85,13 +85,13 @@ const HomePage: React.FC = () => {
                 {pomodoro.looping ? "Disable" : "Enable"} Looping
               </Button>
 
-              <div className={tw`flex items-center space-x-4 align-middle`}>
+              {/* <div className={tw`flex items-center space-x-4 align-middle`}>
                 <Title>Sync</Title>
 
                 <Button icon>
                   <Icon name="help" />
                 </Button>
-              </div>
+              </div> */}
 
               <div className={tw`flex flex-col space-y-8`}>
                 <Title>Theme</Title>
