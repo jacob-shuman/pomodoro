@@ -15,21 +15,21 @@ export const AssetPath: Story = () => {
 
   return (
     <>
-      <ButtonRow>
+      <Button.Row>
         <Title>Input</Title>
 
         <p className={tw`text-xl text-white`}>
           {JSON.stringify(audio.kit.play)}
         </p>
-      </ButtonRow>
+      </Button.Row>
 
-      <ButtonRow>
+      <Button.Row>
         <Title>Result</Title>
 
         <p className={tw`text-xl text-white`}>
           {JSON.stringify(getAudioAssetPath(audio.kit.play))}
         </p>
-      </ButtonRow>
+      </Button.Row>
 
       <p className={tw`text-xl text-white`}>{JSON.stringify(audio.settings)}</p>
     </>
@@ -54,21 +54,21 @@ export const PlayFromKit: Story = () => {
 
   return (
     <>
-      <ButtonRow>
+      <Button.Row>
         <Title>Play Asset</Title>
 
         <Button icon onClick={() => audio.play(audio.kit.play)}>
           <Icon name="play" />
         </Button>
-      </ButtonRow>
+      </Button.Row>
 
-      <ButtonRow>
+      <Button.Row>
         <Title>Pause Asset</Title>
 
         <Button icon onClick={() => audio.play(audio.kit.pause)}>
           <Icon name="play" />
         </Button>
-      </ButtonRow>
+      </Button.Row>
 
       <p className={tw`text-xl text-white`}>{JSON.stringify(audio.settings)}</p>
     </>
@@ -79,7 +79,7 @@ export const Mute: Story<AudioKitAsset> = (props) => {
   const audio = useAudio();
 
   return (
-    <ButtonRow>
+    <Button.Row>
       <Button icon onClick={() => audio.play(audio.kit.play)}>
         <Icon name="play" />
       </Button>
@@ -89,7 +89,7 @@ export const Mute: Story<AudioKitAsset> = (props) => {
       </Button>
 
       <p className={tw`text-xl text-white`}>{JSON.stringify(audio.settings)}</p>
-    </ButtonRow>
+    </Button.Row>
   );
 };
 Mute.args = PlayFromPath.args;

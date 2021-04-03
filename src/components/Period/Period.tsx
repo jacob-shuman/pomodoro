@@ -1,5 +1,6 @@
 import { tw } from "twind";
-import { useTheme } from "@hooks";
+import { usePomodoro, useTheme } from "@hooks";
+import { getHumanReadableDuration } from "@utils/timer";
 
 export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
@@ -30,9 +31,11 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
         styles.font.title,
 
         active
-          ? `bg-[${theme.button.background.active}] text-tomato-light-idle hover:(text-[${theme.button.text.hover}] bg-[${theme.button.background.hover}]) active:(text-tomato-light-active bg-tomato-deep-active)`
-          : "bg-transparent text-tomato-medium-idle hover:(text-tomato-medium-hover) active:(text-tomato-medium-active)",
-        "px-6 py-4 w-96 text-xl font-semibold"
+          ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}] hover:(text-[${theme.button.text.hover}] bg-[${theme.button.background.hover}])`
+          : `bg-transparent text-[${theme.button.text.inactive}] hover:(text-[${theme.button.text.hover}])`,
+
+        "px-6 py-4 w-96 text-xl font-semibold",
+        `active:(text-[${theme.button.text.active}] bg-[${theme.button.background.active}] ring-0)`
       )}
     >
       <div className={tw`flex items-center justify-between`}>
@@ -49,9 +52,16 @@ export interface PeriodListProps
 
 export const PeriodList: React.FC<PeriodListProps> = ({
   children,
+  className,
   ...props
 }) => (
-  <ul {...props} className={tw(props.className, tw`flex flex-col space-y-4`)}>
+  <ul
+    {...props}
+    className={tw(
+      className,
+      tw`flex flex-col space-y-4 overflow-y-scroll w-full items-center p-4`
+    )}
+  >
     {children}
   </ul>
 );
@@ -68,3 +78,27 @@ export const PeriodListItem: React.FC<PeriodListItemProps> = ({
     {children}
   </li>
 );
+
+export const PeriodQueue: React.FC = () => {
+  const pomodoro = usePomodoro();
+
+  return (
+    <PeriodList>
+      {pomodoro.periods.map((p, i) => (
+        <PeriodListItem key={p.title + i}>
+          <PeriodCard
+            active={pomodoro.state.period === i}
+            time={getHumanReadableDuration(p.duration)}
+            onClick={() => {
+              if (pomodoro.state.period !== i) {
+                pomodoro.setPeriod(i);
+              }
+            }}
+          >
+            {p.title}
+          </PeriodCard>
+        </PeriodListItem>
+      ))}
+    </PeriodList>
+  );
+};

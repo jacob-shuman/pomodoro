@@ -25,11 +25,8 @@ export const Example: Story = () => {
         <br />
 
         <div className={tw`text-xl`}>
-          Current Period (Index {pomodoro.period}):
-          <pre>
-            {pomodoro.periods &&
-              JSON.stringify(pomodoro.periods[pomodoro.period])}
-          </pre>
+          Current Period (Index {pomodoro.state.period}):
+          <pre>{pomodoro.periods && JSON.stringify(pomodoro.period)}</pre>
         </div>
         <br />
 
@@ -38,27 +35,27 @@ export const Example: Story = () => {
 
       <section>
         <div className={tw`grid grid-cols-2 gap-x-8 gap-y-4`}>
-          <Button active onClick={() => pomodoro.toggle()}>
+          <Button.Normal active onClick={() => pomodoro.toggle()}>
             {pomodoro.isRunning
               ? "Pause"
               : pomodoro.hasStarted
               ? "Resume"
               : "Start"}
-          </Button>
+          </Button.Normal>
 
-          <Button
+          <Button.Normal
             active
             disabled={!pomodoro.isRunning}
             onClick={() => pomodoro.stop()}
           >
             Stop
-          </Button>
+          </Button.Normal>
 
-          <Button active onClick={pomodoro.toggleLooping}>
+          <Button.Normal active onClick={pomodoro.toggleLooping}>
             {pomodoro.looping ? "Disable Looping" : "Enable Looping"}
-          </Button>
+          </Button.Normal>
 
-          <Button
+          <Button.Normal
             active
             onClick={() =>
               pomodoro.addPeriod({
@@ -68,7 +65,7 @@ export const Example: Story = () => {
             }
           >
             Add 5 Second Period
-          </Button>
+          </Button.Normal>
         </div>
       </section>
     </main>

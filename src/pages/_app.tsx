@@ -1,13 +1,8 @@
 import React from "react";
 import withTwindApp from "@twind/next/app";
 import twindConfig from "../../twind.config";
-import { PageBackground } from "@components";
-import {
-  SettingsProvider,
-  TabsProvider,
-  PomodoroProvider,
-  useAudio,
-} from "@hooks";
+import { Nav, PageBackground } from "@components";
+import { SettingsProvider, PomodoroProvider, useAudio } from "@hooks";
 import "react-circular-progressbar/dist/styles.css";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
@@ -25,13 +20,13 @@ const PomodoroWrapper: React.FC = ({ children }) => {
 
 const App = ({ Component, pageProps }) => (
   <SettingsProvider>
-    <TabsProvider>
-      <PomodoroWrapper>
-        <PageBackground>
-          <Component {...pageProps} />
-        </PageBackground>
-      </PomodoroWrapper>
-    </TabsProvider>
+    <PomodoroWrapper>
+      <Nav />
+
+      <PageBackground>
+        <Component {...pageProps} />
+      </PageBackground>
+    </PomodoroWrapper>
   </SettingsProvider>
 );
 

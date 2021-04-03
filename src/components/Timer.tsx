@@ -16,16 +16,9 @@ export const TimerChildren: React.FC = () => {
     <div
       className={tw`flex flex-col space-y-8 text-4xl font-bold text-center text-white font-poppins`}
     >
-      <h1>
-        {pomodoro.periods[pomodoro.period] &&
-          pomodoro.periods[pomodoro.period].title}
-      </h1>
-      {pomodoro.periods[pomodoro.period].remaining && (
-        <h1>
-          {getHumanReadableDuration(
-            pomodoro.periods[pomodoro.period].remaining
-          )}
-        </h1>
+      <h1>{pomodoro.period && pomodoro.period.title}</h1>
+      {pomodoro.period.remaining && (
+        <h1>{getHumanReadableDuration(pomodoro.period.remaining)}</h1>
       )}
     </div>
   );
@@ -63,24 +56,29 @@ export const Timer: React.FC<
       </CircularProgressbarWithChildren>
 
       {!hideControls && (
-        <ButtonRow>
-          <Button icon onClick={() => pomodoro.previous()}>
-            <Icon name="rewind" />
-          </Button>
-
-          <Button
+        <Button.Row>
+          <Button.Normal
             icon
+            size={"large"}
+            onClick={() => pomodoro.previous()}
+          >
+            <Icon name="rewind" size={"large"} />
+          </Button.Normal>
+
+          <Button.Normal
+            icon
+            size={"large"}
             onClick={() => {
               pomodoro.toggle();
             }}
           >
-            <Icon name={pomodoro.isRunning ? "pause" : "play"} />
-          </Button>
+            <Icon name={pomodoro.isRunning ? "pause" : "play"} size={"large"} />
+          </Button.Normal>
 
-          <Button icon onClick={() => pomodoro.skip()}>
-            <Icon name="skip" />
-          </Button>
-        </ButtonRow>
+          <Button.Normal icon size={"large"} onClick={() => pomodoro.skip()}>
+            <Icon name="skip" size={"large"} />
+          </Button.Normal>
+        </Button.Row>
       )}
     </section>
   );
