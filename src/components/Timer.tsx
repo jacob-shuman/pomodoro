@@ -1,7 +1,7 @@
 import { tw, css } from "twind/css";
 import { usePomodoro, useTheme } from "@hooks";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import { Button, ButtonRow, Icon } from "@components";
+import { Button, Icon } from "@components";
 import { getHumanReadableDuration } from "@utils/timer";
 
 export interface TimerProps {

@@ -20,6 +20,12 @@ export const Button = {
   Row: ButtonRow,
 };
 
+export type {
+  NormalButtonProps,
+  LinkButtonProps,
+  ButtonRowProps,
+} from "./Button/Button";
+
 export const Period = {
   Card: PeriodCard,
   List: PeriodList,
