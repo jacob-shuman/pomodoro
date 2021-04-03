@@ -15,13 +15,13 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
     <nav
       className={tw(
         className,
-        tw`absolute bottom-0 left-0 lg:top-0 w-full z-20`
+        tw`absolute bottom-0 left-0 lg:top-0 w-full lg:h-28 z-20`
       )}
       {...props}
     >
       <div
         className={tw(
-          `hidden lg:flex space-x-4 justify-between p-8 h-28 w-full`
+          `hidden lg:flex space-x-4 justify-between p-8 h-full w-full`
         )}
       >
         <Button.Row>
