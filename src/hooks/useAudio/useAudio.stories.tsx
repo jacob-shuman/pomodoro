@@ -80,11 +80,20 @@ export const Mute: Story<AudioKitAsset> = (props) => {
 
   return (
     <Button.Row>
-      <Button.Normal icon onClick={() => audio.play(audio.kit.play)}>
+      <Button.Normal
+        aria-label={"Play Audio"}
+        name={audio.isMuted ? "mute" : "unmute"}
+        icon
+        onClick={() => audio.play(audio.kit.play)}
+      >
         <Icon name="play" />
       </Button.Normal>
 
-      <Button.Normal icon onClick={() => audio.toggleMute()}>
+      <Button.Normal
+        aria-label={audio.isMuted ? "Mute Audio" : "Unmute Audio"}
+        icon
+        onClick={() => audio.toggleMute()}
+      >
         <Icon name={audio.isMuted ? "mute" : "unmute"} />
       </Button.Normal>
 

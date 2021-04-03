@@ -15,6 +15,8 @@ import {
   IoVolumeHigh,
   IoRepeat,
   IoColorPalette,
+  IoTimer,
+  IoAlbums,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -34,7 +36,9 @@ export interface IconProps extends IconBaseProps {
     | "mute"
     | "unmute"
     | "repeat"
-    | "palette";
+    | "palette"
+    | "timer"
+    | "periods";
 
   size?: "small" | "large";
 }
@@ -83,5 +87,9 @@ export const Icon: React.FC<IconProps> = ({
       return <IoRepeat {...props} className={additionalProps} />;
     case "palette":
       return <IoColorPalette {...props} className={additionalProps} />;
+    case "timer":
+      return <IoTimer {...props} className={additionalProps} />;
+    case "periods":
+      return <IoAlbums {...props} className={additionalProps} />;
   }
 };

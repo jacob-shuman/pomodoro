@@ -35,7 +35,7 @@ export const Timer: React.FC<
   return (
     <section className={tw`flex flex-col items-center space-y-16`} {...props}>
       <CircularProgressbarWithChildren
-        className={tw`w-96`}
+        className={tw`w-72 lg:w-96`}
         counterClockwise
         value={value ?? pomodoro.getPercentCompleted()}
         classes={{
@@ -58,6 +58,7 @@ export const Timer: React.FC<
       {!hideControls && (
         <Button.Row>
           <Button.Normal
+            aria-label="Previous Period"
             icon
             size={"large"}
             onClick={() => pomodoro.previous()}
@@ -66,6 +67,7 @@ export const Timer: React.FC<
           </Button.Normal>
 
           <Button.Normal
+            aria-label={pomodoro.isRunning ? "Pause Timer" : "Play Timer"}
             icon
             size={"large"}
             onClick={() => {
@@ -75,7 +77,12 @@ export const Timer: React.FC<
             <Icon name={pomodoro.isRunning ? "pause" : "play"} size={"large"} />
           </Button.Normal>
 
-          <Button.Normal icon size={"large"} onClick={() => pomodoro.skip()}>
+          <Button.Normal
+            aria-label="Skip Period"
+            icon
+            size={"large"}
+            onClick={() => pomodoro.skip()}
+          >
             <Icon name="skip" size={"large"} />
           </Button.Normal>
         </Button.Row>

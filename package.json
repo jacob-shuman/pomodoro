@@ -1,6 +1,6 @@
 {
   "name": "pomodoro",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "dev": "run-p dev:**",
     "dev:netlify": "ntl dev -c \"next dev\"",
@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@headlessui/react": "^0.3.1",
+    "@headlessui/react": "^0.3.2",
     "@twind/next": "^1.0.6",
     "@use-it/interval": "^1.0.0",
     "next": "10.0.9",

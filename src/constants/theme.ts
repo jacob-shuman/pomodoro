@@ -43,7 +43,7 @@ export const Themes: { [key: string]: Theme } = {
     button: {
       text: {
         active: ThemeColor.tomato.light.hover,
-        hover: ThemeColor.tomato.light.hover,
+        hover: ThemeColor.tomato.medium.hover,
         inactive: ThemeColor.tomato.medium.idle,
       },
       background: {
