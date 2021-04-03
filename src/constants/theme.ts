@@ -55,7 +55,7 @@ export const Themes: { [key: string]: Theme } = {
     progress: ThemeColor.tomato.bright.idle,
     background: {
       color: ThemeColor.tomato.dark.idle,
-      image: BackgroundThemeImage.random,
+      image: BackgroundThemeImage.tic_tac_toe,
       blurAngle: 140,
     },
   },

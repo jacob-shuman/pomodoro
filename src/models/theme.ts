@@ -24,6 +24,19 @@ export enum BackgroundThemeImage {
   random = "random",
 }
 
+export interface ThemeStyles {
+  outline: string;
+  rounded: string;
+  transition: string;
+  transform: string;
+  focus: string;
+  hover: string;
+  font: {
+    title: string;
+    body: string;
+  };
+}
+
 export interface Theme {
   title: string;
   highlight: string;

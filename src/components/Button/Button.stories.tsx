@@ -1,10 +1,9 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import { Button, ButtonRow, ButtonProps } from "@components";
+import { Button, LinkButtonProps, NormalButtonProps } from "@components";
 
 export default {
   title: "Components/Button",
-  component: Button,
   parameters: {
     design: {
       type: "figma",
@@ -14,18 +13,21 @@ export default {
   },
 } as Meta;
 
-export const Active: Story<ButtonProps> = (args) => <Button {...args} />;
-Active.args = { children: "Active", active: true };
+export const Normal: Story<NormalButtonProps> = (args) => (
+  <Button.Normal {...args}>Normal</Button.Normal>
+);
+Normal.args = { active: true };
 
-export const Inactive: Story<ButtonProps> = (args) => <Button {...args} />;
-Inactive.args = { children: "Inactive" };
+export const Link: Story<LinkButtonProps> = (args) => (
+  <Button.Link {...args}>Link</Button.Link>
+);
 
 export const Row: Story<{ count: number }> = ({ count }) => (
-  <ButtonRow>
+  <Button.Row>
     {[...Array(count > -1 ? count : 1)].map((_, i) => (
-      <Button>Button {i}</Button>
+      <Button.Normal>Button {i}</Button.Normal>
     ))}
-  </ButtonRow>
+  </Button.Row>
 );
 Row.args = {
   count: 3,

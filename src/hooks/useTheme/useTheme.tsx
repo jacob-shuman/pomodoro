@@ -1,7 +1,14 @@
 import { tw } from "twind";
-import { useSettings } from "@hooks";
+import { ThemeState, useSettings } from "@hooks";
+import { Themes } from "@constants/theme";
+import { ThemeStyles } from "@models/theme";
 
-export function useTheme() {
+export function useTheme(): {
+  theme: ThemeState;
+  setTheme: (theme: ThemeState) => void;
+  randomizeTheme: () => void;
+  styles: ThemeStyles;
+} {
   const { theme, setTheme } = useSettings();
 
   const outline = tw`outline-none ring(2 offset-2 offset-transparent [${theme.ring}])`;
@@ -9,12 +16,23 @@ export function useTheme() {
   return {
     theme,
     setTheme,
+    randomizeTheme: () => {
+      const availableThemes = Object.entries(Themes)
+        .filter(([k, v]) => v.title !== theme.title)
+        .map(([k, v]) => k);
+
+      setTheme(
+        Themes[
+          availableThemes[Math.floor(Math.random() * availableThemes.length)]
+        ]
+      );
+    },
 
     styles: {
       outline,
       rounded: tw`rounded-xl`,
-      transition: tw`transition duration-300 ease-in-out`,
-      transform: tw`transform hover:scale-105 active:scale-95`,
+      transition: tw`motion-safe:(transition duration-300 ease-in-out)`,
+      transform: tw`motion-safe:(transform hover:scale-105 active:scale-95)`,
       focus: tw`focus:(${outline})`,
       hover: tw`hover:(${outline})`,
       font: {

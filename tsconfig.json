@@ -46,7 +46,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages"
+    "src/pages",
+    "twind.config.ts"
   ],
   "exclude": [
     "node_modules"
