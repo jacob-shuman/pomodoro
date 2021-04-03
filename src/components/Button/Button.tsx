@@ -18,7 +18,7 @@ export const getButtonClassName = ({
   tw(
     className,
 
-    styles.rounded,
+    styles.rounded.all,
     styles.transition,
     styles.transform,
     styles.focus,
@@ -32,8 +32,8 @@ export const getButtonClassName = ({
 
     `font-bold`,
     `hover:(text-[${theme.button.text.hover}])`,
-    `focus:(text-[${theme.button.text.active}])`,
-    `active:(bg-[${theme.button.background.active}] ring-0)`
+    `focus:(text-[${theme.button.text.hover}])`,
+    `active:(bg-[${theme.button.background.active}] text-[${theme.button.text.active}] ring-0)`
   );
 
 export interface NormalButtonProps {
@@ -103,11 +103,12 @@ export interface ButtonRowProps
   extends React.ClassAttributes<HTMLDivElement>,
     React.HTMLAttributes<HTMLDivElement> {}
 
-export const ButtonRow: React.FC<ButtonRowProps> = ({ children, ...props }) => (
-  <div
-    className={tw(props.className, tw`flex items-center space-x-8`)}
-    {...props}
-  >
+export const ButtonRow: React.FC<ButtonRowProps> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <div className={tw(className, tw`flex items-center space-x-8`)} {...props}>
     {children}
   </div>
 );

@@ -6,6 +6,7 @@ import {
   PeriodQueue,
 } from "./Period/Period";
 
+export * from "./Footer";
 export * from "./Icon/Icon";
 export * from "./List";
 export * from "./Nav";

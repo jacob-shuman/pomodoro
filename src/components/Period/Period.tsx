@@ -23,7 +23,7 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
       className={tw(
         props.className,
 
-        styles.rounded,
+        styles.rounded.all,
         styles.transition,
         styles.transform,
         styles.focus,

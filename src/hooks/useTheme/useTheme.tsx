@@ -30,7 +30,10 @@ export function useTheme(): {
 
     styles: {
       outline,
-      rounded: tw`rounded-xl`,
+      rounded: {
+        all: tw`rounded-xl`,
+        top: tw`rounded-t-xl`,
+      },
       transition: tw`motion-safe:(transition duration-300 ease-in-out)`,
       transform: tw`motion-safe:(transform hover:scale-105 active:scale-95)`,
       focus: tw`focus:(${outline})`,

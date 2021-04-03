@@ -44,7 +44,7 @@ export const List: React.FC<ListProps> = ({
   <div
     className={tw(
       className,
-      tw`flex flex-col h-full min-w-[25%] max-h-[70%] justify-center`
+      tw`flex-col h-full min-w-[25%] max-h-[70%] justify-center`
     )}
     {...props}
   >

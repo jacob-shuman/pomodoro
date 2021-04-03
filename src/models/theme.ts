@@ -26,7 +26,10 @@ export enum BackgroundThemeImage {
 
 export interface ThemeStyles {
   outline: string;
-  rounded: string;
+  rounded: {
+    all: string;
+    top: string;
+  };
   transition: string;
   transform: string;
   focus: string;
