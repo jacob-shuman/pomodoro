@@ -10,7 +10,7 @@ export const PageBackground: React.FC = ({ children }) => {
       {/* TODO: background-image is causing a client/server mismatch */}
       <main
         className={tw(
-          tw`absolute z-10 h-full w-full bg-repeat`,
+          tw`absolute z-10 w-full h-full bg-repeat`,
           css`
             background-color: ${theme.background.color};
             background-image: ${getBackgroundThemeImage(
@@ -19,6 +19,7 @@ export const PageBackground: React.FC = ({ children }) => {
           `
         )}
       >
+        {/* TODO: selection color not working */}
         <div
           className={tw(
             "h-full w-full fixed top-0 left-0",
@@ -55,7 +56,7 @@ export const PageBackground: React.FC = ({ children }) => {
           )}
         ></div>
         <div
-          className={tw`fixed top-0 left-0 w-screen h-screen overflow-y-scroll`}
+          className={tw`fixed top-0 left-0 w-screen h-screen overflow-y-auto`}
         >
           {children}
         </div>
@@ -63,3 +64,5 @@ export const PageBackground: React.FC = ({ children }) => {
     </>
   );
 };
+
+export default PageBackground;

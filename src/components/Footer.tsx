@@ -10,13 +10,13 @@ export const Footer: React.FC<FooterProps> = ({ app, ...props }) => {
 
   return (
     <footer
-      className={tw`absolute bottom-0 left-0 hidden lg:flex w-full z-20 space-x-4 justify-between p-8`}
+      className={tw`absolute bottom-0 left-0 z-20 justify-between hidden w-full p-8 space-x-4 lg:flex`}
       {...props}
     >
       <p
         className={tw(
           styles.font.body,
-          tw`text-[${theme.button.text.inactive}] tracking-wider font-semibold opacity-25`
+          tw`text-[${theme.button.text.idle}] tracking-wider font-semibold opacity-25`
         )}
       >
         {app?.name} &bull; {app?.version}

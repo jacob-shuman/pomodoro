@@ -4,7 +4,7 @@ import { ThemeState, useTheme } from "@hooks";
 import { ThemeStyles } from "@models/theme";
 
 export const getButtonClassName = ({
-  className,
+  className = "",
   theme,
   styles,
   icon,
@@ -21,19 +21,23 @@ export const getButtonClassName = ({
     styles.rounded.all,
     styles.transition,
     styles.transform,
-    styles.focus,
     styles.hover,
-    styles.font.body,
+    styles.focus,
+    !className.includes(styles.font.title) &&
+      !className.includes(styles.font.body) &&
+      styles.font.body,
 
-    icon ? (size === "large" ? `h-16 w-16` : `h-12 w-12`) : `px-16 py-2`,
+    icon && (size === "large" ? `h-16 w-16` : `h-12 w-12`),
     active
       ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}]`
-      : `bg-transparent text-[${theme.button.text.inactive}]`,
+      : tw(
+          `bg-transparent text-[${theme.button.text.idle}]`,
+          `hover:(bg-[${theme.button.background.hover}])`,
+          `focus:(bg-[${theme.button.background.focus}] text-[${theme.button.text.focus}])`,
+          `active:(bg-[${theme.button.background.pressed}] text-[${theme.button.text.pressed}] ring-0)`
+        ),
 
-    `font-bold`,
-    `hover:(text-[${theme.button.text.hover}])`,
-    `focus:(text-[${theme.button.text.hover}])`,
-    `active:(bg-[${theme.button.background.active}] text-[${theme.button.text.active}] ring-0)`
+    `font-bold`
   );
 
 export interface NormalButtonProps {
