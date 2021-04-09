@@ -1,5 +1,5 @@
 import { DefaultTheme } from "@constants/theme";
-import { BackgroundThemeImage, Theme } from "@models/theme";
+import { BackgroundThemeImage, Theme, ThemeColor } from "@models/theme";
 
 // HEX2RGB (renamed to getRgb) function created by comficker - https://gist.github.com/comficker/871d378c535854c1c460f7867a191a5a#file-hex2rgb-js
 export function getRgb(hex: string) {
@@ -31,6 +31,36 @@ export function getRgb(hex: string) {
   }
   return `${r}, ${g}, ${b}`;
 }
+
+export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
+  title,
+  highlight: colors[20],
+  ring: {
+    hover: colors[20],
+    focus: colors[30],
+  },
+  button: {
+    text: {
+      idle: colors[80],
+      focus: colors[80],
+      hover: colors[80],
+      pressed: colors[90],
+      active: colors[100],
+    },
+    background: {
+      hover: "transparent",
+      focus: "transparent",
+      pressed: colors[30],
+      active: colors[40],
+    },
+  },
+  progress: colors[50],
+  background: {
+    color: colors[10],
+    image: BackgroundThemeImage.random,
+    blurAngle: 140,
+  },
+});
 
 export const buildTheme = (theme: Theme = DefaultTheme): Theme => ({
   ...DefaultTheme,

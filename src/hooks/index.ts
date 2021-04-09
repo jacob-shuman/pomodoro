@@ -1,3 +1,4 @@
+export * from "./useTabs";
 export * from "./useAudio/useAudio";
 export * from "./usePomodoro/usePomodoro";
 export * from "./useSettings/useSettings";

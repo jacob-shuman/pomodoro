@@ -50,10 +50,7 @@ export const Icon: React.FC<IconProps> = ({
 }) => {
   const additionalProps = tw(
     props.className,
-    tw(
-      size === "large" ? `w-10 h-10` : `w-8 h-8`,
-      `mx-auto h-full my-auto text-center`
-    )
+    tw(size === "large" ? `w-10` : `w-8`, `mx-auto h-full my-auto text-center`)
   );
 
   switch (name) {

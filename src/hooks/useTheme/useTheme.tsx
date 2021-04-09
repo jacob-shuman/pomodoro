@@ -11,7 +11,12 @@ export function useTheme(): {
 } {
   const { theme, setTheme } = useSettings();
 
-  const outline = tw`outline-none ring(2 offset-2 offset-transparent [${theme.ring}])`;
+  const ring = tw`ring(2 offset-2 offset-transparent)`;
+  const outline = {
+    base: tw`outline-none ${ring}`,
+    focus: tw`ring-[${theme.ring.focus}]`,
+    hover: tw`ring-[${theme.ring.hover}]`,
+  };
 
   return {
     theme,
@@ -29,6 +34,7 @@ export function useTheme(): {
     },
 
     styles: {
+      ring,
       outline,
       rounded: {
         all: tw`rounded-xl`,
@@ -36,8 +42,8 @@ export function useTheme(): {
       },
       transition: tw`motion-safe:(transition duration-300 ease-in-out)`,
       transform: tw`motion-safe:(transform hover:scale-105 active:scale-95)`,
-      focus: tw`focus:(${outline})`,
-      hover: tw`hover:(${outline})`,
+      hover: tw`hover:(${outline.base} ${outline.hover})`,
+      focus: tw`focus:(${outline.base} ${outline.focus})`,
       font: {
         title: tw`font-poppins`,
         body: tw`font-raleway`,

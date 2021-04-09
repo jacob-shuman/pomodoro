@@ -1,6 +1,7 @@
 import { tw } from "twind";
 import { usePomodoro, useTheme } from "@hooks";
 import { getHumanReadableDuration } from "@utils/timer";
+import { Button } from "@components";
 
 export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
@@ -10,39 +11,24 @@ export interface PeriodCardProps
 }
 
 export const PeriodCard: React.FC<PeriodCardProps> = ({
-  active,
+  className,
   children,
   time,
   ...props
 }) => {
-  const { theme, styles } = useTheme();
-
   return (
-    <button
+    <Button.Normal
       {...props}
       className={tw(
-        props.className,
-
-        styles.rounded.all,
-        styles.transition,
-        styles.transform,
-        styles.focus,
-        styles.hover,
-        styles.font.title,
-
-        active
-          ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}] hover:(text-[${theme.button.text.hover}] bg-[${theme.button.background.hover}])`
-          : `bg-transparent text-[${theme.button.text.inactive}] hover:(text-[${theme.button.text.hover}])`,
-
-        "px-6 py-4 w-96 text-xl font-semibold",
-        `active:(text-[${theme.button.text.active}] bg-[${theme.button.background.active}] ring-0)`
+        className,
+        `flex items-center justify-between font-poppins text-xl font-semibold space-x-24 px-8 py-4 w-96`
       )}
     >
-      <div className={tw`flex items-center justify-between`}>
-        <p>{children}</p>
-        <p>{time}</p>
-      </div>
-    </button>
+      {/* <div className={tw`w-full`}> */}
+      <p>{children}</p>
+      <p>{time}</p>
+      {/* </div> */}
+    </Button.Normal>
   );
 };
 
@@ -59,7 +45,7 @@ export const PeriodList: React.FC<PeriodListProps> = ({
     {...props}
     className={tw(
       className,
-      tw`flex flex-col space-y-4 overflow-y-scroll w-full items-center p-4`
+      tw`flex flex-col items-center w-full p-4 space-y-4 overflow-y-auto`
     )}
   >
     {children}

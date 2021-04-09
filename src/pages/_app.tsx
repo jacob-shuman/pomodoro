@@ -3,7 +3,12 @@ import NextHead from "next/head";
 import withTwindApp from "@twind/next/app";
 import twindConfig from "../../twind.config";
 import { Footer, Nav, PageBackground } from "@components";
-import { SettingsProvider, PomodoroProvider, useAudio } from "@hooks";
+import {
+  SettingsProvider,
+  TabsProvider,
+  PomodoroProvider,
+  useAudio,
+} from "@hooks";
 import "react-circular-progressbar/dist/styles.css";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
@@ -26,15 +31,17 @@ const App = ({ Component, pageProps }) => (
     </NextHead>
 
     <SettingsProvider>
-      <PomodoroWrapper>
-        <Nav />
+      <TabsProvider>
+        <PomodoroWrapper>
+          <Nav />
 
-        <PageBackground>
-          <Component {...pageProps} />
-        </PageBackground>
+          <PageBackground>
+            <Component {...pageProps} />
+          </PageBackground>
 
-        <Footer app={pageProps.app} />
-      </PomodoroWrapper>
+          <Footer app={pageProps.app} />
+        </PomodoroWrapper>
+      </TabsProvider>
     </SettingsProvider>
   </>
 );

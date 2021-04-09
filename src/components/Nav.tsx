@@ -1,21 +1,22 @@
 import { tw } from "twind";
 import { Button, Icon } from "@components";
-import { useAudio, usePomodoro, useTheme } from "@hooks";
+import { useTabs, useAudio, usePomodoro, useTheme } from "@hooks";
 
 export interface NavProps
   extends React.ClassAttributes<HTMLElement>,
     React.HTMLAttributes<HTMLElement> {}
 
 export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
+  const { styles, randomizeTheme } = useTheme();
+  const { tab, setTab } = useTabs();
   const audio = useAudio();
-  const { theme, styles, randomizeTheme } = useTheme();
   const pomodoro = usePomodoro();
 
   return (
     <nav
       className={tw(
         className,
-        tw`absolute bottom-0 left-0 lg:top-0 w-full lg:h-28 z-20`
+        tw`absolute bottom-0 left-0 z-20 w-full lg:top-0 lg:h-28`
       )}
       {...props}
     >
@@ -103,22 +104,42 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
         className={tw(
           styles.rounded.top,
 
-          `lg:hidden items-center justify-between p-8 bg-[${theme.button.background.active}] w-full h-1/6`
+          `lg:hidden items-center justify-between p-8 w-full h-1/6`
         )}
       >
-        <Button.Normal icon size="large">
+        <Button.Normal
+          icon
+          size="large"
+          active={tab === "theme"}
+          onClick={() => setTab("theme")}
+        >
           <Icon name="palette" size="large" />
         </Button.Normal>
 
-        <Button.Normal icon active size="large">
+        <Button.Normal
+          icon
+          size="large"
+          active={tab === "timer"}
+          onClick={() => setTab("timer")}
+        >
           <Icon name="timer" size="large" />
         </Button.Normal>
 
-        <Button.Normal icon size="large">
+        <Button.Normal
+          icon
+          size="large"
+          active={tab === "periods"}
+          onClick={() => setTab("periods")}
+        >
           <Icon name="periods" size="large" />
         </Button.Normal>
 
-        <Button.Normal icon size="large">
+        <Button.Normal
+          icon
+          size="large"
+          active={tab === "help"}
+          onClick={() => setTab("help")}
+        >
           <Icon name="help" size="large" />
         </Button.Normal>
       </Button.Row>

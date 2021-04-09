@@ -1,6 +1,6 @@
 {
   "name": "pomodoro",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "dev": "run-p dev:**",
     "dev:netlify": "ntl dev -c \"next dev\"",

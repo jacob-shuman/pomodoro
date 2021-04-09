@@ -1,22 +1,3 @@
-export interface ButtonTheme {
-  text: {
-    active: string;
-    hover: string;
-    inactive: string;
-  };
-  background: {
-    idle: string;
-    hover: string;
-    active: string;
-  };
-}
-
-export interface BackgroundTheme {
-  color: string;
-  image: BackgroundThemeImage;
-  blurAngle: number;
-}
-
 export enum BackgroundThemeImage {
   solid = "solid",
   tic_tac_toe = "tic_tac_toe",
@@ -25,25 +6,66 @@ export enum BackgroundThemeImage {
 }
 
 export interface ThemeStyles {
-  outline: string;
+  ring: string;
+  outline: {
+    base: string;
+    hover: string;
+    focus: string;
+  };
   rounded: {
     all: string;
     top: string;
   };
   transition: string;
   transform: string;
-  focus: string;
   hover: string;
+  focus: string;
   font: {
     title: string;
     body: string;
   };
 }
 
+export interface ThemeColor {
+  10: string;
+  20: string;
+  30: string;
+  40: string;
+  50: string;
+  60: string;
+  70: string;
+  80: string;
+  90: string;
+  100: string;
+}
+
+export interface ThemeValueState {
+  hover: string;
+  focus: string;
+  pressed: string;
+  active: string;
+}
+
+export interface RingTheme {
+  hover: string;
+  focus: string;
+}
+
+export interface ButtonTheme {
+  text: ThemeValueState & { idle: string };
+  background: ThemeValueState;
+}
+
+export interface BackgroundTheme {
+  color: string;
+  image: BackgroundThemeImage;
+  blurAngle: number;
+}
+
 export interface Theme {
   title: string;
   highlight: string;
-  ring: string;
+  ring: RingTheme;
   button: ButtonTheme;
   progress: string;
   background: BackgroundTheme;
