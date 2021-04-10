@@ -44,6 +44,7 @@ export interface ThemeValueState {
   focus: string;
   pressed: string;
   active: string;
+  disabled: string;
 }
 
 export interface TimerTheme {

@@ -18,17 +18,20 @@ export const Footer: React.FC<FooterProps> = ({ app, ...props }) => {
       {...props}
     >
       <Button.Link
-        href="google.com"
+        href="https://github.com/jacob-shuman/pomodoro"
         className={tw(
-          `flex items-center justify-start space-x-4`,
-          `text-[${theme.button.text.idle}] tracking-wider font-semibold opacity-25`
+          `text-[${theme.button.text.idle}] tracking-wider font-semibold`
         )}
       >
-        <Icon name="github" />
+        <div
+          className={tw`flex items-center justify-start space-x-4 opacity-25`}
+        >
+          <Icon name="github" />
 
-        <p className={tw()}>
-          {app?.name} &bull; {app?.version}
-        </p>
+          <p>
+            {app?.name} &bull; {app?.version}
+          </p>
+        </div>
       </Button.Link>
     </footer>
   );

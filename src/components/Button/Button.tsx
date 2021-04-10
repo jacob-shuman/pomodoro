@@ -10,8 +10,10 @@ export const getButtonClassName = ({
   icon,
   active,
   size,
+  disabled,
 }: Partial<LinkButtonProps & NormalButtonProps> & {
   className?: string;
+  disabled?: boolean;
   theme?: ThemeState;
   styles?: ThemeStyles;
 }): string =>
@@ -21,16 +23,21 @@ export const getButtonClassName = ({
     styles.rounded.all,
     styles.transition,
     styles.transform,
-    styles.hover,
     styles.focus,
+
     !className.includes(styles.font.title) &&
       !className.includes(styles.font.body) &&
       styles.font.body,
 
     icon ? (size === "large" ? `h-16 w-16` : `h-12 w-12`) : `px-4 py-2`,
+
     active
       ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}]`
+      : disabled
+      ? `bg-[${theme.button.background.disabled}] text-[${theme.button.text.disabled}] cursor-not-allowed`
       : tw(
+          styles.hover,
+
           `bg-transparent text-[${theme.button.text.idle}]`,
           `hover:(bg-[${theme.button.background.hover}])`,
           `focus:(bg-[${theme.button.background.focus}] text-[${theme.button.text.focus}])`,
@@ -50,7 +57,15 @@ export const NormalButton: React.FC<
   NormalButtonProps &
     React.ClassAttributes<HTMLButtonElement> &
     React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ active, icon, children, className, size = "small", ...props }) => {
+> = ({
+  active,
+  icon,
+  children,
+  className,
+  disabled,
+  size = "small",
+  ...props
+}) => {
   const { theme, styles } = useTheme();
 
   return (
@@ -62,7 +77,9 @@ export const NormalButton: React.FC<
         active,
         icon,
         size,
+        disabled,
       })}
+      disabled={disabled}
       {...props}
     >
       {children}

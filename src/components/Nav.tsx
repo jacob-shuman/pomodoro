@@ -8,7 +8,7 @@ export interface NavProps
     React.HTMLAttributes<HTMLElement> {}
 
 export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
-  const { styles, randomizeTheme } = useTheme();
+  const { theme, styles, randomizeTheme } = useTheme();
   const { tab, setTab } = useTabs();
   const audio = useAudio();
   const pomodoro = usePomodoro();
@@ -23,7 +23,7 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
     >
       <div
         className={tw(
-          `hidden lg:flex space-x-4 justify-between p-8 h-full w-full`
+          `hidden justify-between lg:flex space-x-4 p-8 h-full w-full`
         )}
       >
         {/* <Button.Row>
@@ -52,15 +52,29 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Link>
         </Button.Row> */}
 
-        <Button.Normal onClick={() => setTab("timer")}>
-          {pomodoro.period.title} &bull;{" "}
-          {getHumanReadableDuration(
-            pomodoro.period.remaining ?? pomodoro.period.duration
-          )}
-        </Button.Normal>
+        {/* <Button.Normal onClick={() => setTab("timer")}>
+          <p className={tw(styles.font.title, ``)}>
+            {pomodoro.period.title} &bull;{" "}
+            {getHumanReadableDuration(
+              pomodoro.period.remaining ?? pomodoro.period.duration
+            )}
+          </p>
+        </Button.Normal> */}
+
+        {/* <div className={tw`w-32`} /> */}
+        <Button.Row className={tw`w-32`}>
+          <Button.Normal
+            aria-label={`Randomize Theme`}
+            icon
+            onClick={() => randomizeTheme()}
+          >
+            <Icon name="palette" />
+          </Button.Normal>
+        </Button.Row>
 
         <Button.Row>
           <Button.Normal
+            disabled
             aria-label={`Theme`}
             active={tab === "theme"}
             onClick={() => setTab("theme")}
@@ -81,6 +95,7 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Normal>
 
           <Button.Normal
+            disabled
             aria-label={`Periods`}
             active={tab === "periods"}
             onClick={() => setTab("periods")}
@@ -91,6 +106,7 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Normal>
 
           <Button.Normal
+            disabled
             aria-label={`About`}
             active={tab === "about"}
             onClick={() => setTab("about")}
@@ -101,7 +117,7 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Normal>
         </Button.Row>
 
-        <Button.Row>
+        <Button.Row className={tw`w-32`}>
           <Button.Normal
             aria-label={`${pomodoro.looping ? "Disable" : "Enable"} Looping`}
             icon
@@ -118,14 +134,6 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
             onClick={audio.toggleMute}
           >
             <Icon name={audio.isMuted ? "mute" : "unmute"} />
-          </Button.Normal>
-
-          <Button.Normal
-            aria-label={`Randomize Theme`}
-            icon
-            onClick={() => randomizeTheme()}
-          >
-            <Icon name="palette" />
           </Button.Normal>
         </Button.Row>
       </div>
