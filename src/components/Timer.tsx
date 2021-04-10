@@ -11,15 +11,21 @@ export interface TimerProps {
 
 export const TimerChildren: React.FC = () => {
   const pomodoro = usePomodoro();
+  const { theme } = useTheme();
 
   return (
     <div
       className={tw`flex flex-col space-y-8 text-4xl font-bold text-center text-white font-poppins`}
     >
-      <h1>{pomodoro.period && pomodoro.period.title}</h1>
-      {pomodoro.period.remaining && (
-        <h1>{getHumanReadableDuration(pomodoro.period.remaining)}</h1>
-      )}
+      <h1 className={tw`text-[${theme.timer.title}]`}>
+        {pomodoro.period && pomodoro.period.title}
+      </h1>
+
+      <h1 className={tw`text-[${theme.timer.duration}]`}>
+        {getHumanReadableDuration(
+          pomodoro.period.remaining ?? pomodoro.period.duration
+        )}
+      </h1>
     </div>
   );
 };
@@ -60,30 +66,30 @@ export const Timer: React.FC<
           <Button.Normal
             aria-label="Previous Period"
             icon
-            size={"large"}
+            size="large"
             onClick={() => pomodoro.previous()}
           >
-            <Icon name="rewind" size={"large"} />
+            <Icon name="rewind" size="large" />
           </Button.Normal>
 
           <Button.Normal
             aria-label={pomodoro.isRunning ? "Pause Timer" : "Play Timer"}
             icon
-            size={"large"}
+            size="large"
             onClick={() => {
               pomodoro.toggle();
             }}
           >
-            <Icon name={pomodoro.isRunning ? "pause" : "play"} size={"large"} />
+            <Icon name={pomodoro.isRunning ? "pause" : "play"} size="large" />
           </Button.Normal>
 
           <Button.Normal
             aria-label="Skip Period"
             icon
-            size={"large"}
+            size="large"
             onClick={() => pomodoro.skip()}
           >
-            <Icon name="skip" size={"large"} />
+            <Icon name="skip" size="large" />
           </Button.Normal>
         </Button.Row>
       )}

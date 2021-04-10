@@ -17,6 +17,7 @@ import {
   IoColorPalette,
   IoTimer,
   IoAlbums,
+  IoTrash,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -26,7 +27,7 @@ export interface IconProps extends IconBaseProps {
     | "play"
     | "pause"
     | "rewind"
-    | "help"
+    | "about"
     | "copy"
     | "github"
     | "music"
@@ -38,7 +39,8 @@ export interface IconProps extends IconBaseProps {
     | "repeat"
     | "palette"
     | "timer"
-    | "periods";
+    | "periods"
+    | "delete";
 
   size?: "small" | "large";
 }
@@ -62,7 +64,7 @@ export const Icon: React.FC<IconProps> = ({
       return <IoPause {...props} className={additionalProps} />;
     case "rewind":
       return <IoPlaySkipBack {...props} className={additionalProps} />;
-    case "help":
+    case "about":
       return <IoHelpCircle {...props} className={additionalProps} />;
     case "copy":
       return <IoCopy {...props} className={additionalProps} />;
@@ -88,5 +90,7 @@ export const Icon: React.FC<IconProps> = ({
       return <IoTimer {...props} className={additionalProps} />;
     case "periods":
       return <IoAlbums {...props} className={additionalProps} />;
+    case "delete":
+      return <IoTrash {...props} className={additionalProps} />;
   }
 };

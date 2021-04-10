@@ -35,6 +35,10 @@ export function getRgb(hex: string) {
 export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
   title,
   highlight: colors[20],
+  timer: {
+    title: colors[100],
+    duration: colors[90],
+  },
   ring: {
     hover: colors[20],
     focus: colors[30],
@@ -46,12 +50,14 @@ export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
       hover: colors[80],
       pressed: colors[90],
       active: colors[100],
+      disabled: colors[20],
     },
     background: {
       hover: "transparent",
       focus: "transparent",
       pressed: colors[30],
       active: colors[40],
+      disabled: "transparent",
     },
   },
   progress: colors[50],

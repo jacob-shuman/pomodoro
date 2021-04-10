@@ -44,6 +44,12 @@ export interface ThemeValueState {
   focus: string;
   pressed: string;
   active: string;
+  disabled: string;
+}
+
+export interface TimerTheme {
+  title: string;
+  duration: string;
 }
 
 export interface RingTheme {
@@ -65,6 +71,7 @@ export interface BackgroundTheme {
 export interface Theme {
   title: string;
   highlight: string;
+  timer: TimerTheme;
   ring: RingTheme;
   button: ButtonTheme;
   progress: string;

@@ -1,13 +1,14 @@
 import { tw } from "twind";
 import { Button, Icon } from "@components";
 import { useTabs, useAudio, usePomodoro, useTheme } from "@hooks";
+import { getHumanReadableDuration } from "@utils/timer";
 
 export interface NavProps
   extends React.ClassAttributes<HTMLElement>,
     React.HTMLAttributes<HTMLElement> {}
 
 export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
-  const { styles, randomizeTheme } = useTheme();
+  const { theme, styles, randomizeTheme } = useTheme();
   const { tab, setTab } = useTabs();
   const audio = useAudio();
   const pomodoro = usePomodoro();
@@ -22,13 +23,18 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
     >
       <div
         className={tw(
-          `hidden lg:flex space-x-4 justify-between p-8 h-full w-full`
+          `hidden justify-between lg:flex space-x-4 p-8 h-full w-full`
         )}
       >
-        <Button.Row>
-          <Button.Normal aria-label={"About"} icon>
-            <Icon name="help" />
-          </Button.Normal>
+        {/* <Button.Row>
+          <Button.Link
+            aria-label={"Music from Kenney.nl"}
+            icon
+            href="https://kenney.nl"
+          >
+            <Icon name="music" />
+          </Button.Link>
+
           <Button.Link
             aria-label={"Open GitHub Repo"}
             icon
@@ -36,9 +42,82 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           >
             <Icon name="github" />
           </Button.Link>
+
+          <Button.Link
+            aria-label={"Jacob Shuman Portfolio"}
+            icon
+            href="https://jacob-shuman.ca"
+          >
+            <Icon name="person" />
+          </Button.Link>
+        </Button.Row> */}
+
+        {/* <Button.Normal onClick={() => setTab("timer")}>
+          <p className={tw(styles.font.title, ``)}>
+            {pomodoro.period.title} &bull;{" "}
+            {getHumanReadableDuration(
+              pomodoro.period.remaining ?? pomodoro.period.duration
+            )}
+          </p>
+        </Button.Normal> */}
+
+        {/* <div className={tw`w-32`} /> */}
+        <Button.Row className={tw`w-32`}>
+          <Button.Normal
+            aria-label={`Randomize Theme`}
+            icon
+            onClick={() => randomizeTheme()}
+          >
+            <Icon name="palette" />
+          </Button.Normal>
         </Button.Row>
 
         <Button.Row>
+          <Button.Normal
+            disabled
+            aria-label={`Theme`}
+            active={tab === "theme"}
+            onClick={() => setTab("theme")}
+          >
+            <Icon name="palette" />
+
+            <p className={tw(styles.font.title)}>Theme</p>
+          </Button.Normal>
+
+          <Button.Normal
+            aria-label={`Timer`}
+            active={tab === "timer"}
+            onClick={() => setTab("timer")}
+          >
+            <Icon name="timer" />
+
+            <p className={tw(styles.font.title)}>Timer</p>
+          </Button.Normal>
+
+          <Button.Normal
+            disabled
+            aria-label={`Periods`}
+            active={tab === "periods"}
+            onClick={() => setTab("periods")}
+          >
+            <Icon name="periods" />
+
+            <p className={tw(styles.font.title)}>Periods</p>
+          </Button.Normal>
+
+          <Button.Normal
+            disabled
+            aria-label={`About`}
+            active={tab === "about"}
+            onClick={() => setTab("about")}
+          >
+            <Icon name="about" />
+
+            <p className={tw(styles.font.title)}>About</p>
+          </Button.Normal>
+        </Button.Row>
+
+        <Button.Row className={tw`w-32`}>
           <Button.Normal
             aria-label={`${pomodoro.looping ? "Disable" : "Enable"} Looping`}
             icon
@@ -56,50 +135,10 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           >
             <Icon name={audio.isMuted ? "mute" : "unmute"} />
           </Button.Normal>
-
-          <Button.Normal aria-label={`Themes`} icon onClick={randomizeTheme}>
-            <Icon name="palette" />
-          </Button.Normal>
-
-          {/* <Button.Normal
-          className={tw`flex items-center space-x-4`}
-          onClick={() => {
-            
-            // TODO: Use links instead of router
-            
-            router.replace("https://github.com/jacob-shuman/pomodoro");
-          }}
-          >
-          <Icon name="github" />
-          View on GitHub
-          </Button.Normal>
-          <Button.Normal
-          className={tw`flex items-center space-x-4`}
-          onClick={() => {
-            
-            // TODO: Use links instead of router
-            
-            router.replace("https://kenney.nl");
-          }}
-          >
-          <Icon name="music" />
-          Audio from Kenny.nl
-          </Button.Normal>
-          <Button.Normal
-          className={tw`flex items-center space-x-4`}
-          onClick={() => {
-            
-            // TODO: Use links instead of router
-            
-            router.replace("https://jacob-shuman.ca");
-          }}
-          >
-          <Icon name="person" />
-          Built by Jacob Shuman
-        </Button.Normal> */}
         </Button.Row>
       </div>
 
+      {/* TODO: Create component for both desktop and mobile layouts */}
       <Button.Row
         className={tw(
           styles.rounded.top,
@@ -137,10 +176,10 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
         <Button.Normal
           icon
           size="large"
-          active={tab === "help"}
-          onClick={() => setTab("help")}
+          active={tab === "about"}
+          onClick={() => setTab("about")}
         >
-          <Icon name="help" size="large" />
+          <Icon name="about" size="large" />
         </Button.Normal>
       </Button.Row>
     </nav>
