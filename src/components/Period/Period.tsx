@@ -1,7 +1,7 @@
 import { tw } from "twind";
-import { usePomodoro, useTheme } from "@hooks";
+import { usePomodoro } from "@hooks";
 import { getHumanReadableDuration } from "@utils/timer";
-import { Button } from "@components";
+import { Button, Icon } from "@components";
 
 export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
@@ -24,10 +24,8 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
         `flex items-center justify-between font-poppins text-xl font-semibold space-x-24 px-8 py-4 w-96`
       )}
     >
-      {/* <div className={tw`w-full`}> */}
       <p>{children}</p>
       <p>{time}</p>
-      {/* </div> */}
     </Button.Normal>
   );
 };
@@ -65,24 +63,41 @@ export const PeriodListItem: React.FC<PeriodListItemProps> = ({
   </li>
 );
 
-export const PeriodQueue: React.FC = () => {
+export interface PeriodQueueProps {
+  editing: boolean;
+}
+
+export const PeriodQueue: React.FC<PeriodQueueProps> = ({ editing }) => {
   const pomodoro = usePomodoro();
 
   return (
     <PeriodList>
       {pomodoro.periods.map((p, i) => (
         <PeriodListItem key={p.title + i}>
-          <PeriodCard
-            active={pomodoro.state.period === i}
-            time={getHumanReadableDuration(p.duration)}
-            onClick={() => {
-              if (pomodoro.state.period !== i) {
-                pomodoro.setPeriod(i);
-              }
-            }}
-          >
-            {p.title}
-          </PeriodCard>
+          <div className="flex items-center space-x-8">
+            <PeriodCard
+              active={pomodoro.state.period === i}
+              time={getHumanReadableDuration(p.duration)}
+              onClick={() => {
+                if (pomodoro.state.period !== i) {
+                  pomodoro.setPeriod(i);
+                }
+              }}
+            >
+              {p.title}
+            </PeriodCard>
+
+            {editing && (
+              <Button.Normal
+                aria-label={"Delete Period"}
+                icon
+                disabled={pomodoro.periods.length < 2}
+                onClick={() => pomodoro.removePeriod(i)}
+              >
+                <Icon name="delete" />
+              </Button.Normal>
+            )}
+          </div>
         </PeriodListItem>
       ))}
     </PeriodList>

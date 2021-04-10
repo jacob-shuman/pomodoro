@@ -27,7 +27,7 @@ export const getButtonClassName = ({
       !className.includes(styles.font.body) &&
       styles.font.body,
 
-    icon && (size === "large" ? `h-16 w-16` : `h-12 w-12`),
+    icon ? (size === "large" ? `h-16 w-16` : `h-12 w-12`) : `px-4 py-2`,
     active
       ? `bg-[${theme.button.background.active}] text-[${theme.button.text.active}]`
       : tw(
@@ -37,7 +37,7 @@ export const getButtonClassName = ({
           `active:(bg-[${theme.button.background.pressed}] text-[${theme.button.text.pressed}] ring-0)`
         ),
 
-    `font-bold`
+    `font-bold flex items-center space-x-4`
   );
 
 export interface NormalButtonProps {

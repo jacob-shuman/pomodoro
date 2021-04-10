@@ -1,5 +1,6 @@
-import { useTheme } from "@hooks";
 import { tw } from "twind";
+import { useTheme } from "@hooks";
+import { Button, Icon } from "@components";
 
 export interface FooterProps {
   app: { name: string; version: string };
@@ -10,17 +11,25 @@ export const Footer: React.FC<FooterProps> = ({ app, ...props }) => {
 
   return (
     <footer
-      className={tw`absolute bottom-0 left-0 z-20 justify-between hidden w-full p-8 space-x-4 lg:flex`}
+      className={tw(
+        styles.font.body,
+        `absolute bottom-0 left-0 z-20 items-center justify-start hidden w-full p-8 space-x-4 lg:flex`
+      )}
       {...props}
     >
-      <p
+      <Button.Link
+        href="google.com"
         className={tw(
-          styles.font.body,
-          tw`text-[${theme.button.text.idle}] tracking-wider font-semibold opacity-25`
+          `flex items-center justify-start space-x-4`,
+          `text-[${theme.button.text.idle}] tracking-wider font-semibold opacity-25`
         )}
       >
-        {app?.name} &bull; {app?.version}
-      </p>
+        <Icon name="github" />
+
+        <p className={tw()}>
+          {app?.name} &bull; {app?.version}
+        </p>
+      </Button.Link>
     </footer>
   );
 };

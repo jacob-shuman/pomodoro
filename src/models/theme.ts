@@ -46,6 +46,11 @@ export interface ThemeValueState {
   active: string;
 }
 
+export interface TimerTheme {
+  title: string;
+  duration: string;
+}
+
 export interface RingTheme {
   hover: string;
   focus: string;
@@ -65,6 +70,7 @@ export interface BackgroundTheme {
 export interface Theme {
   title: string;
   highlight: string;
+  timer: TimerTheme;
   ring: RingTheme;
   button: ButtonTheme;
   progress: string;

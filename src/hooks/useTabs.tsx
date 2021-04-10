@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
-export type Tab = "theme" | "timer" | "periods" | "help";
+export type Tab = "theme" | "timer" | "periods" | "about";
 
 export interface TabsProviderProps {
   children?: React.ReactNode;
