@@ -1,31 +1,19 @@
-import { tw } from "twind";
-import {} from "@headlessui/react";
-import { Button, Icon, List, Period, Timer } from "@components";
-import { useState } from "react";
+import { ThemeTab, TimerTab, PeriodsTab, AboutTab } from "@components";
+import { useTabs } from "@hooks";
 
 const HomePage: React.FC = () => {
-  const [editPeriods, setEditPeriods] = useState(false);
+  const { tab } = useTabs();
 
-  return (
-    <div className={tw`flex items-center justify-center h-full lg:space-x-24`}>
-      <List className={tw`items-center hidden lg:flex`}>
-        <Button.Normal
-          aria-label={"Edit Periods"}
-          className="self-start"
-          active={editPeriods}
-          onClick={() => setEditPeriods(!editPeriods)}
-        >
-          <p>Edit Periods</p>
-
-          <Icon name="periods" />
-        </Button.Normal>
-
-        <Period.Queue editing={editPeriods} />
-      </List>
-
-      <Timer />
-    </div>
-  );
+  switch (tab) {
+    case "theme":
+      return <ThemeTab />;
+    case "timer":
+      return <TimerTab />;
+    case "periods":
+      return <PeriodsTab />;
+    default:
+      return <AboutTab />;
+  }
 };
 
 export const getStaticProps = async () => ({

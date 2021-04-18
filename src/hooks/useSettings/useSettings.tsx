@@ -35,7 +35,7 @@ export interface SettingsContextProps extends Settings {
 }
 
 export const DefaultSettings: Settings = {
-  audio: { mute: false, kit: AudioKits.digital },
+  audio: { mute: true, kit: AudioKits.digital },
   theme: { ...Themes.pomodoroRed },
 };
 

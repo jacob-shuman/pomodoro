@@ -18,6 +18,9 @@ import {
   IoTimer,
   IoAlbums,
   IoTrash,
+  IoSwapVertical,
+  IoAdd,
+  IoShuffle,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -40,7 +43,10 @@ export interface IconProps extends IconBaseProps {
     | "palette"
     | "timer"
     | "periods"
-    | "delete";
+    | "delete"
+    | "move"
+    | "add"
+    | "random";
 
   size?: "small" | "large";
 }
@@ -92,5 +98,11 @@ export const Icon: React.FC<IconProps> = ({
       return <IoAlbums {...props} className={additionalProps} />;
     case "delete":
       return <IoTrash {...props} className={additionalProps} />;
+    case "move":
+      return <IoSwapVertical {...props} className={additionalProps} />;
+    case "add":
+      return <IoAdd {...props} className={additionalProps} />;
+    case "random":
+      return <IoShuffle {...props} className={additionalProps} />;
   }
 };

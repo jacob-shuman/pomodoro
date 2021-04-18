@@ -32,41 +32,116 @@ export function getRgb(hex: string) {
   return `${r}, ${g}, ${b}`;
 }
 
+// Unexpected Light theme
+// export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
+//   title,
+//   highlight: colors[100],
+//   timer: {
+//     title: colors[900],
+//     duration: colors[800],
+//   },
+//   ring: {
+//     hover: colors[100],
+//     focus: colors[200],
+//   },
+//   button: {
+//     text: {
+//       idle: colors[700],
+//       focus: colors[700],
+//       hover: colors[700],
+//       pressed: colors[800],
+//       active: colors[900],
+//       disabled: colors[100],
+//     },
+//     background: {
+//       hover: "transparent",
+//       focus: "transparent",
+//       pressed: colors[200],
+//       active: colors[300],
+//       disabled: "transparent",
+//     },
+//   },
+//   progress: colors[400],
+//   background: {
+//     color: colors[50],
+//     image: BackgroundThemeImage.random,
+//     blurAngle: 140,
+//   },
+// });
+
+// Dark Theme
 export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
   title,
-  highlight: colors[20],
+  highlight: colors[800],
   timer: {
-    title: colors[100],
-    duration: colors[90],
+    title: colors[50],
+    duration: colors[100],
   },
   ring: {
-    hover: colors[20],
-    focus: colors[30],
+    hover: colors[800],
+    focus: colors[700],
   },
   button: {
     text: {
-      idle: colors[80],
-      focus: colors[80],
-      hover: colors[80],
-      pressed: colors[90],
-      active: colors[100],
-      disabled: colors[20],
+      idle: colors[200],
+      focus: colors[200],
+      hover: colors[200],
+      pressed: colors[100],
+      active: colors[50],
+      disabled: colors[800],
     },
     background: {
       hover: "transparent",
       focus: "transparent",
-      pressed: colors[30],
-      active: colors[40],
+      pressed: colors[700],
+      active: colors[600],
       disabled: "transparent",
     },
   },
-  progress: colors[50],
+  progress: colors[600],
   background: {
-    color: colors[10],
+    color: colors[900],
     image: BackgroundThemeImage.random,
     blurAngle: 140,
   },
 });
+
+// Original
+// export const generateTheme = (title: string, colors: ThemeColor): Theme => ({
+//   title,
+//   highlight: colors[20],
+//   timer: {
+//     title: colors[100],
+//     duration: colors[90],
+//   },
+//   ring: {
+//     hover: colors[20],
+//     focus: colors[30],
+//   },
+//   button: {
+//     text: {
+//       idle: colors[80],
+//       focus: colors[80],
+//       hover: colors[80],
+//       pressed: colors[90],
+//       active: colors[100],
+//       disabled: colors[20],
+//     },
+//     background: {
+//       hover: "transparent",
+//       focus: "transparent",
+//       pressed: colors[30],
+//       active: colors[40],
+//       disabled: "transparent",
+//     },
+//   },
+//   progress: colors[50],
+//   background: {
+//     color: colors[10],
+//     image: BackgroundThemeImage.random,
+//     blurAngle: 140,
+//   },
+// });
 
 export const buildTheme = (theme: Theme = DefaultTheme): Theme => ({
   ...DefaultTheme,

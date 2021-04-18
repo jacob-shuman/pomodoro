@@ -37,9 +37,12 @@ export interface PomodoroContextProps {
 
   setPeriod: (period: number) => void;
   addPeriod: (newPeriod: PomodoroPeriod) => void;
+  movePeriod: (source: number, destination: number) => void;
   removePeriod: (index: number) => void;
 
   toggle: () => void;
+  start: () => void;
+  pause: () => void;
   stop: () => void;
 
   toggleLooping: () => void;
@@ -92,8 +95,11 @@ const PomodoroContext = createContext<PomodoroContextProps>({
   previous: () => {},
   setPeriod: () => {},
   addPeriod: () => {},
+  movePeriod: () => {},
   removePeriod: () => {},
   toggle: () => {},
+  start: () => {},
+  pause: () => {},
   stop: () => {},
   toggleLooping: () => {},
 });
@@ -142,6 +148,10 @@ export function PomodoroProvider({
   const getRemainingTime = () =>
     periods[period]?.remaining ?? periods[period].duration;
 
+  const start = () => timer.start();
+
+  const pause = () => timer.pause();
+
   const stop = () => {
     timer.stop();
     setPomodoroState({
@@ -155,9 +165,21 @@ export function PomodoroProvider({
     setPomodoroState({ periods: periods.concat(newPeriod) });
   };
 
+  const movePeriod = (source: number, destination: number) => {
+    const updatedPeriods = periods;
+    const period = periods.splice(source, 1);
+
+    updatedPeriods.splice(destination, 0, ...period);
+
+    setPomodoroState({ periods: updatedPeriods });
+  };
+
   const removePeriod = (index: number) => {
     if (periods.length > 1) {
-      setPomodoroState({ periods: periods.filter((p, i) => i !== index) });
+      setPomodoroState({
+        period: period >= periods.length - 1 ? 0 : period,
+        periods: periods.filter((p, i) => i !== index),
+      });
     }
   };
 
@@ -232,9 +254,12 @@ export function PomodoroProvider({
         previous,
 
         addPeriod,
+        movePeriod,
         removePeriod,
 
         toggle,
+        start,
+        pause,
         stop,
 
         looping,
