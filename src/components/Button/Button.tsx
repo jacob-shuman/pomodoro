@@ -18,8 +18,6 @@ export const getButtonClassName = ({
   styles?: ThemeStyles;
 }): string =>
   tw(
-    className,
-
     styles.rounded.all,
     styles.transition,
     styles.transform,
@@ -44,7 +42,8 @@ export const getButtonClassName = ({
           `active:(bg-[${theme.button.background.pressed}] text-[${theme.button.text.pressed}] ring-0)`
         ),
 
-    `font-bold flex items-center space-x-4`
+    `font-bold flex items-center space-x-4`,
+    className
   );
 
 export interface NormalButtonProps {

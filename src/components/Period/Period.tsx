@@ -1,7 +1,14 @@
 import { tw } from "twind";
-import { usePomodoro } from "@hooks";
+import { usePomodoro, useTheme } from "@hooks";
 import { getHumanReadableDuration } from "@utils/timer";
 import { Button, Icon } from "@components";
+import {
+  Droppable,
+  Draggable,
+  DroppableProvided,
+  DraggableProvided,
+} from "react-beautiful-dnd";
+import humanId from "human-id";
 
 export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
@@ -32,74 +39,141 @@ export const PeriodCard: React.FC<PeriodCardProps> = ({
 
 export interface PeriodListProps
   extends React.ClassAttributes<HTMLUListElement>,
-    React.HTMLAttributes<HTMLUListElement> {}
+    React.HTMLAttributes<HTMLUListElement> {
+  editable?: boolean;
+}
 
 export const PeriodList: React.FC<PeriodListProps> = ({
+  editable,
   children,
   className,
   ...props
-}) => (
-  <ul
-    {...props}
-    className={tw(
-      className,
-      tw`flex flex-col items-center w-full p-4 space-y-4 overflow-y-auto`
-    )}
-  >
-    {children}
-  </ul>
-);
+}) => {
+  const component = (provided?: DroppableProvided) => (
+    <ul
+      className={tw(
+        className,
+        tw`flex flex-col items-center w-full p-4 space-y-4 overflow-y-auto`
+      )}
+      ref={provided?.innerRef ?? undefined}
+      {...props}
+      {...provided?.droppableProps}
+    >
+      {children}
+      {provided?.placeholder}
+    </ul>
+  );
+
+  return editable ? (
+    <Droppable droppableId={humanId()}>{component}</Droppable>
+  ) : (
+    component()
+  );
+};
 
 export interface PeriodListItemProps
   extends React.ClassAttributes<HTMLLIElement>,
-    React.HTMLAttributes<HTMLLIElement> {}
-
-export const PeriodListItem: React.FC<PeriodListItemProps> = ({
-  children,
-  ...props
-}) => (
-  <li {...props} className={tw(props.className, tw`list-none`)}>
-    {children}
-  </li>
-);
-
-export interface PeriodQueueProps {
-  editing: boolean;
+    React.HTMLAttributes<HTMLLIElement> {
+  index: number;
+  editable?: boolean;
+  children: (provided: DraggableProvided) => React.ReactNode;
 }
 
-export const PeriodQueue: React.FC<PeriodQueueProps> = ({ editing }) => {
+export const PeriodListItem: React.FC<PeriodListItemProps> = ({
+  index,
+  editable,
+  children,
+  ...props
+}) => {
+  const component = (provided?: DraggableProvided) => (
+    <li
+      className={tw(props.className, tw`list-none`)}
+      ref={provided?.innerRef ?? undefined}
+      {...props}
+    >
+      {children(provided)}
+    </li>
+  );
+
+  return editable ? (
+    <Draggable draggableId={humanId()} index={index}>
+      {component}
+    </Draggable>
+  ) : (
+    component()
+  );
+};
+
+export interface PeriodQueueProps {
+  editable?: boolean; // Should Draggable/Droppable be rendered
+}
+
+export const PeriodQueue: React.FC<PeriodQueueProps> = ({ editable }) => {
   const pomodoro = usePomodoro();
+  const { styles } = useTheme();
 
   return (
-    <PeriodList>
+    <PeriodList editable={editable}>
       {pomodoro.periods.map((p, i) => (
-        <PeriodListItem key={p.title + i}>
-          <div className="flex items-center space-x-8">
-            <PeriodCard
-              active={pomodoro.state.period === i}
-              time={getHumanReadableDuration(p.duration)}
-              onClick={() => {
-                if (pomodoro.state.period !== i) {
-                  pomodoro.setPeriod(i);
-                }
-              }}
+        <PeriodListItem key={p.title + i} index={i} editable={editable}>
+          {(provided) => (
+            <div
+              className="flex items-center space-x-8"
+              ref={provided?.innerRef}
+              {...provided?.draggableProps}
             >
-              {p.title}
-            </PeriodCard>
+              {editable && (
+                <>
+                  <Button.Normal
+                    {...provided?.dragHandleProps}
+                    disabled={pomodoro.isRunning || pomodoro.periods.length < 2}
+                    aria-label={"Move Period"}
+                    icon
+                  >
+                    <Icon name="move" />
+                  </Button.Normal>
 
-            {editing && (
-              <Button.Normal
-                aria-label={"Delete Period"}
-                icon
-                disabled={pomodoro.periods.length < 2}
-                onClick={() => pomodoro.removePeriod(i)}
+                  <Button.Normal
+                    aria-label={"Delete Period"}
+                    icon
+                    disabled={pomodoro.periods.length < 2}
+                    onClick={() => pomodoro.removePeriod(i)}
+                  >
+                    <Icon name="delete" />
+                  </Button.Normal>
+                </>
+              )}
+
+              <PeriodCard
+                active={!editable && pomodoro.state.period === i}
+                time={getHumanReadableDuration(p.duration)}
+                onClick={() => {
+                  if (!editable && pomodoro.state.period !== i) {
+                    pomodoro.setPeriod(i);
+                  }
+                }}
               >
-                <Icon name="delete" />
-              </Button.Normal>
-            )}
-          </div>
+                {p.title}
+              </PeriodCard>
+            </div>
+          )}
         </PeriodListItem>
       ))}
+
+      {editable && (
+        <Button.Normal
+          onClick={() =>
+            pomodoro.addPeriod({
+              title: "Short Break",
+              duration: { hours: 0, minutes: 5, seconds: 0 },
+            })
+          }
+        >
+          <Icon name="add" />
+
+          <p className={tw(styles.font.title)}>New Period</p>
+        </Button.Normal>
+      )}
     </PeriodList>
   );
 };

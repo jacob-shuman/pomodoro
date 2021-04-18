@@ -61,20 +61,10 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </p>
         </Button.Normal> */}
 
-        {/* <div className={tw`w-32`} /> */}
-        <Button.Row className={tw`w-32`}>
-          <Button.Normal
-            aria-label={`Randomize Theme`}
-            icon
-            onClick={() => randomizeTheme()}
-          >
-            <Icon name="palette" />
-          </Button.Normal>
-        </Button.Row>
+        <div className={tw`w-32`} />
 
         <Button.Row>
           <Button.Normal
-            disabled
             aria-label={`Theme`}
             active={tab === "theme"}
             onClick={() => setTab("theme")}
@@ -95,7 +85,6 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Normal>
 
           <Button.Normal
-            disabled
             aria-label={`Periods`}
             active={tab === "periods"}
             onClick={() => setTab("periods")}
@@ -106,7 +95,6 @@ export const Nav: React.FC<NavProps> = ({ className, ...props }) => {
           </Button.Normal>
 
           <Button.Normal
-            disabled
             aria-label={`About`}
             active={tab === "about"}
             onClick={() => setTab("about")}

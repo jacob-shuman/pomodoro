@@ -8,8 +8,10 @@ import {
   TabsProvider,
   PomodoroProvider,
   useAudio,
+  usePomodoro,
 } from "@hooks";
 import "react-circular-progressbar/dist/styles.css";
+import { getHumanReadableDuration } from "@utils/timer";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
   const audio = useAudio();
@@ -24,22 +26,38 @@ const PomodoroWrapper: React.FC = ({ children }) => {
   );
 };
 
+const AppWrapper: React.FC = ({ children }) => {
+  const pomodoro = usePomodoro();
+
+  return (
+    <>
+      <NextHead>
+        <title>
+          {pomodoro.period.title} &bull;{" "}
+          {getHumanReadableDuration(
+            pomodoro.period.remaining ?? pomodoro.period.duration
+          )}
+        </title>
+      </NextHead>
+      {children}
+    </>
+  );
+};
+
 const App = ({ Component, pageProps }) => (
   <>
-    <NextHead>
-      <title>Pomodoro</title>
-    </NextHead>
-
     <SettingsProvider>
       <TabsProvider>
         <PomodoroWrapper>
-          <Nav />
+          <AppWrapper>
+            <Nav />
 
-          <PageBackground>
-            <Component {...pageProps} />
-          </PageBackground>
+            <PageBackground>
+              <Component {...pageProps} />
+            </PageBackground>
 
-          <Footer app={pageProps.app} />
+            <Footer app={pageProps.app} />
+          </AppWrapper>
         </PomodoroWrapper>
       </TabsProvider>
     </SettingsProvider>
