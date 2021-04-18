@@ -29,8 +29,10 @@ export const List: Story<{ count: number; active: number }> = ({
 }) => (
   <Period.List>
     {[...Array(count > -1 ? count : 1)].map((_, i) => (
-      <Period.ListItem>
-        <Period.Card active={active === i}>Button {i}</Period.Card>
+      <Period.ListItem index={i}>
+        {(provided) => (
+          <Period.Card active={active === i}>Button {i}</Period.Card>
+        )}
       </Period.ListItem>
     ))}
   </Period.List>
