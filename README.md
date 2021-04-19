@@ -20,6 +20,8 @@
 
 A clean web-based timer using the [pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The project was created due to a lack of a web-based timer using the pomodoro technique with a robust feature set.
 
+If you have any questions or would like to talk about the project feel free to [start a discussion](https://github.com/jacob-shuman/pomodoro/discussions).
+
 <a id='roadmap'/>
 
 ## :clipboard: Roadmap
@@ -42,7 +44,7 @@ A clean web-based timer using the [pomodoro technique](https://en.wikipedia.org/
 
 ## :speech_balloon: Contributing
 
-I would extremely appreciate any contributions to the project! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file, [roadmap](#roadmap), and other resources on this repository before getting started.
+I would extremely appreciate any contributions to the project! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file, [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file, [roadmap](#roadmap), and the existing [issues](https://github.com/jacob-shuman/pomodoro/issues) before getting started.
 
 <a id='scripts'/>
 
