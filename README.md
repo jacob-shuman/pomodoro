@@ -7,7 +7,7 @@
 ## :triangular_flag_on_post: Table of Contents
 
 - [:question: What is it?](#what-is-it)
-- [:clipboard: Features](#features)
+- [:clipboard: Roadmap](#roadmap)
 - [:speech_balloon: Contributing](#contributing)
   - [:electric_plug: Scripts](#scripts)
   - [:toolbox: Prerequisites](#prerequisites)
@@ -20,9 +20,9 @@
 
 A clean web-based timer using the [pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The project was created due to a lack of a web-based timer using the pomodoro technique with a robust feature set.
 
-<a id='features'/>
+<a id='roadmap'/>
 
-## :clipboard: Features
+## :clipboard: Roadmap
 
 | Feature                             | State?                       |
 | ----------------------------------- | ---------------------------- |
@@ -42,7 +42,7 @@ A clean web-based timer using the [pomodoro technique](https://en.wikipedia.org/
 
 ## :speech_balloon: Contributing
 
-The app is hosted on Netlify and I would appreciate any contributions! Please refer to the roadmap and other resources on this repository before creating a feature request issue to be sure it doesn't conflict with any current plans.
+I would extremely appreciate any contributions to the project! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file, [roadmap](#roadmap), and other resources on this repository before getting started.
 
 <a id='scripts'/>
 
