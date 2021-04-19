@@ -1,29 +1,40 @@
-import { useState } from "react";
 import { tw } from "twind";
-import { Button, Icon, List, Period, Timer } from "@components";
+import { Button, Icon, List } from "@components";
 
 export const AboutTab: React.FC = () => {
   return (
     <div
       className={tw`flex flex-col items-center justify-center h-full space-y-24`}
     >
-      <Button.Link aria-label={"Music from Kenney.nl"} href="https://kenney.nl">
+      <Button.Link
+        aria-label={"Navigate to Kenney.nl"}
+        href="https://kenney.nl"
+      >
         <Icon name="music" />
 
         <p>Audio from Kenney.nl</p>
       </Button.Link>
 
       <Button.Link
-        aria-label={"Open GitHub Repo"}
+        aria-label={"Navigate to Hero Patterns"}
+        href="https://www.heropatterns.com/"
+      >
+        <Icon name="background" />
+
+        <p>Backgrounds from Hero Patterns</p>
+      </Button.Link>
+
+      <Button.Link
+        aria-label={"Navigate to Project on GitHub"}
         href="https://github.com/jacob-shuman/pomodoro"
       >
         <Icon name="github" />
 
-        <p>View on GitHub</p>
+        <p>View Project on GitHub</p>
       </Button.Link>
 
       <Button.Link
-        aria-label={"Jacob Shuman Portfolio"}
+        aria-label={"Navigate to Jacob Shuman Portfolio"}
         href="https://jacob-shuman.ca"
       >
         <Icon name="person" />

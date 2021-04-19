@@ -1,7 +1,7 @@
 import { tw } from "twind";
 import { usePomodoro, useTheme } from "@hooks";
 import { getHumanReadableDuration } from "@utils/timer";
-import { Button, Icon } from "@components";
+import { Button, Icon, List } from "@components";
 import {
   Droppable,
   Draggable,
@@ -161,18 +161,61 @@ export const PeriodQueue: React.FC<PeriodQueueProps> = ({ editable }) => {
       ))}
 
       {editable && (
-        <Button.Normal
-          onClick={() =>
-            pomodoro.addPeriod({
-              title: "Short Break",
-              duration: { hours: 0, minutes: 5, seconds: 0 },
-            })
-          }
+        <div
+          className={tw`flex flex-col items-center justify-center h-full space-y-4`}
         >
-          <Icon name="add" />
+          <Button.Row>
+            <Button.Normal
+              active
+              onClick={() =>
+                pomodoro.addPeriod({
+                  title: "Focus",
+                  duration: { hours: 0, minutes: 30, seconds: 0 },
+                })
+              }
+            >
+              <Icon name="add" />
 
-          <p className={tw(styles.font.title)}>New Period</p>
-        </Button.Normal>
+              <p className={tw(styles.font.title)}>Add Focus Period</p>
+            </Button.Normal>
+
+            <Button.Normal
+              active
+              onClick={() =>
+                pomodoro.addPeriod({
+                  title: "Short Break",
+                  duration: { hours: 0, minutes: 5, seconds: 0 },
+                })
+              }
+            >
+              <Icon name="add" />
+
+              <p className={tw(styles.font.title)}>Add Short Break</p>
+            </Button.Normal>
+
+            <Button.Normal
+              active
+              onClick={() =>
+                pomodoro.addPeriod({
+                  title: "Long Break",
+                  duration: { hours: 0, minutes: 15, seconds: 0 },
+                })
+              }
+            >
+              <Icon name="add" />
+
+              <p className={tw(styles.font.title)}>Add Long Break</p>
+            </Button.Normal>
+          </Button.Row>
+
+          <Button.Row>
+            <Button.Normal active onClick={pomodoro.resetPeriods}>
+              <Icon name="reset" />
+
+              <p className={tw(styles.font.title)}>Reset Periods</p>
+            </Button.Normal>
+          </Button.Row>
+        </div>
       )}
     </PeriodList>
   );

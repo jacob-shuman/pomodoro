@@ -4,6 +4,7 @@ import { useTimer } from "@hooks";
 import { decrementDuration } from "@utils/timer";
 import { PomodoroPeriod } from "@models/pomodoro";
 import { isDurationComplete } from "@utils/timer";
+import { DefaultPomodoroPeriods } from "@constants/pomodoro";
 
 export interface PomodoroState {
   isFinished: boolean;
@@ -35,7 +36,10 @@ export interface PomodoroContextProps {
   skip: () => void;
   previous: () => void;
 
+  setPeriods: (periods: PomodoroPeriod[]) => void;
   setPeriod: (period: number) => void;
+  resetPeriods: () => void;
+
   addPeriod: (newPeriod: PomodoroPeriod) => void;
   movePeriod: (source: number, destination: number) => void;
   removePeriod: (index: number) => void;
@@ -51,32 +55,7 @@ export interface PomodoroContextProps {
 export const DefaultPomodoroState: PomodoroState = {
   isFinished: false,
   looping: true,
-  periods: [
-    {
-      title: "Focus",
-      duration: { hours: 0, minutes: 30, seconds: 0 },
-    },
-    {
-      title: "Short Break",
-      duration: { hours: 0, minutes: 5, seconds: 0 },
-    },
-    {
-      title: "Focus",
-      duration: { hours: 0, minutes: 30, seconds: 0 },
-    },
-    {
-      title: "Short Break",
-      duration: { hours: 0, minutes: 5, seconds: 0 },
-    },
-    {
-      title: "Focus",
-      duration: { hours: 0, minutes: 30, seconds: 0 },
-    },
-    {
-      title: "Long Break",
-      duration: { hours: 0, minutes: 15, seconds: 0 },
-    },
-  ],
+  periods: DefaultPomodoroPeriods,
   period: 0,
 };
 
@@ -93,7 +72,9 @@ const PomodoroContext = createContext<PomodoroContextProps>({
   getPercentCompleted: () => 0,
   skip: () => {},
   previous: () => {},
+  setPeriods: () => {},
   setPeriod: () => {},
+  resetPeriods: () => {},
   addPeriod: () => {},
   movePeriod: () => {},
   removePeriod: () => {},
@@ -160,6 +141,9 @@ export function PomodoroProvider({
     });
     onStop?.();
   };
+
+  const resetPeriods = () =>
+    setPomodoroState({ period: 0, periods: DefaultPomodoroPeriods });
 
   const addPeriod = (newPeriod: PomodoroPeriod) => {
     setPomodoroState({ periods: periods.concat(newPeriod) });
@@ -246,12 +230,14 @@ export function PomodoroProvider({
         periods,
         period: periods[period],
 
+        setPeriods: (periods: PomodoroPeriod[]) => {
+          setPomodoroState({ period: 0, periods });
+        },
         setPeriod: (period: number) => {
           resetPeriod();
           setPomodoroState({ period });
         },
-        skip,
-        previous,
+        resetPeriods,
 
         addPeriod,
         movePeriod,
@@ -261,6 +247,8 @@ export function PomodoroProvider({
         start,
         pause,
         stop,
+        skip,
+        previous,
 
         looping,
         toggleLooping,

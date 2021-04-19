@@ -21,6 +21,8 @@ import {
   IoSwapVertical,
   IoAdd,
   IoShuffle,
+  IoRefresh,
+  IoImage,
 } from "react-icons/io5";
 import { tw } from "twind";
 
@@ -46,7 +48,9 @@ export interface IconProps extends IconBaseProps {
     | "delete"
     | "move"
     | "add"
-    | "random";
+    | "random"
+    | "reset"
+    | "background";
 
   size?: "small" | "large";
 }
@@ -104,5 +108,9 @@ export const Icon: React.FC<IconProps> = ({
       return <IoAdd {...props} className={additionalProps} />;
     case "random":
       return <IoShuffle {...props} className={additionalProps} />;
+    case "reset":
+      return <IoRefresh {...props} className={additionalProps} />;
+    case "background":
+      return <IoImage {...props} className={additionalProps} />;
   }
 };
