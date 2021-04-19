@@ -6,8 +6,7 @@
     "dev:netlify": "ntl dev -c \"next dev\"",
     "dev:storybook": "start-storybook -s ./public -p 6006",
     "build": "next build",
-    "build:storybook": "build-storybook -s ./public",
-    "start": "next start"
+    "build:storybook": "build-storybook -s ./public"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.2",

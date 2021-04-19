@@ -1,36 +1,102 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e2adee17-47e6-427e-a83e-a6eeb9d01cb3/deploy-status)](https://app.netlify.com/sites/pomodoro-jacob-shuman/deploys)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pomodoro
 
-## Getting Started
+### _Minimalistic web-based pomodoro timer_
 
-First, run the development server:
+## :triangular_flag_on_post: Table of Contents
+
+- [:question: What is it?](#what-is-it)
+- [:clipboard: Roadmap](#roadmap)
+- [:speech_balloon: Contributing](#contributing)
+  - [:electric_plug: Scripts](#scripts)
+  - [:toolbox: Prerequisites](#prerequisites)
+  - [:wrench: Setup](#setup)
+  - [:computer: Running a development server](#running-a-development-server)
+
+<a id='what-is-it'/>
+
+## :question: What is it?
+
+A clean web-based timer using the [pomodoro technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). The project was created due to a lack of a web-based timer using the pomodoro technique with a robust feature set.
+
+If you have any questions or would like to talk about the project feel free to [start a discussion](https://github.com/jacob-shuman/pomodoro/discussions).
+
+<a id='roadmap'/>
+
+## :clipboard: Roadmap
+
+| Feature                             | State?                       |
+| ----------------------------------- | ---------------------------- |
+| Themes                              | :white_check_mark: Completed |
+| Adjust Period Order (Drag and Drop) | :white_check_mark: Completed |
+| Add Period                          | :white_check_mark: Completed |
+| Delete Period                       | :white_check_mark: Completed |
+| UI Audio                            | :warning: Partially          |
+| Complete Storybook Coverage         | :x: On Roadmap               |
+| PWA                                 | :x: On Roadmap               |
+| Custom Themes                       | :x: On Roadmap               |
+| Add Custom Period                   | :x: On Roadmap               |
+| Change Period Title/Duration        | :x: On Roadmap               |
+| P2P Device Sync                     | :x: On Roadmap               |
+
+<a id='contributing'/>
+
+## :speech_balloon: Contributing
+
+I would extremely appreciate any contributions to the project! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file, [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) file, [roadmap](#roadmap), and the existing [issues](https://github.com/jacob-shuman/pomodoro/issues) before getting started.
+
+<a id='scripts'/>
+
+### :electric_plug: Scripts
+
+Any of the following scripts can be run from the terminal using the following format:
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm run SCRIPT_NAME
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Name              | Description                                     |
+| ----------------- | ----------------------------------------------- |
+| `dev`             | Runs all `dev:**` scripts simultaneously        |
+| `dev:netlify`     | Runs a dev server with the netlify cli          |
+| `dev:storybook`   | Runs a storybook dev server                     |
+| `build`           | Builds the production-ready version of the site |
+| `build:storybook` | Exports a static version of storybook           |
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<a id='prerequisites'/>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### :toolbox: Prerequisites
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- This project uses React, please make sure you have at least a fundamental understanding of React before contributing.
+- In addition to React this project uses Next.js. It is also recommended to have some knowledge of Next.js before contributing. Please use the following links as reference for Next.js:
+  - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+  - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    d
 
-## Learn More
+<a id='setup'/>
 
-To learn more about Next.js, take a look at the following resources:
+### :wrench: Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Install [Node.js](https://nodejs.org/en/) (**Please make sure you install node version 10 or greater**).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Clone this repository to your computer and navigate to the project's root directory.
 
-## Deploy on Vercel
+3. Run the following command to install all required node packages:
+   ```bash
+   npm i
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<a id='running-a-development-server'/>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### :computer: Running a development server
+
+1. If you haven't already, follow the [setup](#setup) instructions before continuing.
+
+2. Run a development server using the following command (Reference the [scripts](#scripts) for a full list of all scripts):
+
+   ```bash
+   npm run dev:netlify
+   ```
+
+3. A browser tab will be opened automatically pointing to [http://localhost:8888](http://localhost:8888).
