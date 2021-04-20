@@ -45,6 +45,7 @@ export interface PomodoroContextProps {
 
   addPeriod: (newPeriod: PomodoroPeriod) => void;
   movePeriod: (source: number, destination: number) => void;
+  updatePeriod: (index: number, periodData: Partial<PomodoroPeriod>) => void;
   removePeriod: (index: number) => void;
 
   toggle: () => void;
@@ -80,6 +81,7 @@ const PomodoroContext = createContext<PomodoroContextProps>({
   resetPeriods: () => {},
   addPeriod: () => {},
   movePeriod: () => {},
+  updatePeriod: () => {},
   removePeriod: () => {},
   toggle: () => {},
   start: () => {},
@@ -219,16 +221,16 @@ export function PomodoroProvider({
     return 100;
   };
 
-  const updatePeriod = (periodData: Partial<PomodoroPeriod>) => {
+  const updatePeriod = (index: number, periodData: Partial<PomodoroPeriod>) => {
     setPomodoroState({
       periods: periods.map((p, i) =>
-        i === period ? { ...p, ...periodData } : p
+        i === index ? { ...p, ...periodData } : p
       ),
     });
   };
 
   const resetPeriod = () => {
-    updatePeriod({ remaining: undefined });
+    updatePeriod(period, { remaining: undefined });
   };
 
   const skip = () => {
@@ -270,6 +272,7 @@ export function PomodoroProvider({
 
         addPeriod,
         movePeriod,
+        updatePeriod,
         removePeriod,
 
         toggle,

@@ -16,14 +16,17 @@ import { getHumanReadableDuration } from "@utils/timer";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
   const audio = useAudio();
-  const { randomizeTheme } = useTheme();
+  const { setTheme } = useTheme();
+  const { period } = usePomodoro();
 
   return (
     <PomodoroProvider
       onStart={() => audio.play(audio.kit.play)}
       onPause={() => audio.play(audio.kit.pause)}
       afterPeriodChange={() => {
-        randomizeTheme();
+        if (period.theme) {
+          setTheme(period.theme);
+        }
       }}
     >
       {children}

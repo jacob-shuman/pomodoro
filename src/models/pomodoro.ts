@@ -1,4 +1,5 @@
 import { TimerDuration } from "@hooks/useTimer/useTimer";
+import { Theme } from "./theme";
 
 export enum PomodoroError {
   MISSING_PERIODS = "MISSING_PERIODS",
@@ -48,4 +49,7 @@ export interface PomodoroPeriod {
   duration: TimerDuration;
 
   remaining?: TimerDuration;
+
+  // Optional theme to use when period is active
+  theme?: Theme;
 }
