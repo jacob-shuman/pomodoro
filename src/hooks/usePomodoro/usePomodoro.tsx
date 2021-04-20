@@ -20,6 +20,9 @@ export interface PomodoroProviderProps {
   onStart?: () => void;
   onPause?: () => void;
   onStop?: () => void;
+
+  beforePeriodChange?: () => void;
+  afterPeriodChange?: () => void;
 }
 
 export interface PomodoroContextProps {
@@ -93,6 +96,8 @@ export function PomodoroProvider({
   onStart,
   onPause,
   onStop,
+  beforePeriodChange,
+  afterPeriodChange,
 }: PomodoroProviderProps) {
   const [pomodoroState, setPomodoroState] = useReduction<PomodoroState>(state);
   const { isFinished, looping, periods, period } = pomodoroState;
@@ -120,7 +125,9 @@ export function PomodoroProvider({
             timer.start();
           }
         } else {
+          beforePeriodChange?.();
           setPomodoroState({ period: period + 1 });
+          afterPeriodChange?.();
         }
       }
     },
@@ -135,10 +142,14 @@ export function PomodoroProvider({
 
   const stop = () => {
     timer.stop();
+
+    beforePeriodChange?.();
     setPomodoroState({
       periods: periods.map((p) => ({ ...p, remaining: undefined })),
       period: 0,
     });
+    afterPeriodChange?.();
+
     onStop?.();
   };
 
@@ -155,15 +166,27 @@ export function PomodoroProvider({
 
     updatedPeriods.splice(destination, 0, ...period);
 
+    beforePeriodChange?.();
     setPomodoroState({ periods: updatedPeriods });
+    afterPeriodChange?.();
   };
 
   const removePeriod = (index: number) => {
     if (periods.length > 1) {
+      const resetPeriod = period >= periods.length - 1;
+
+      if (resetPeriod) {
+        beforePeriodChange?.();
+      }
+
       setPomodoroState({
-        period: period >= periods.length - 1 ? 0 : period,
+        period: resetPeriod ? 0 : period,
         periods: periods.filter((p, i) => i !== index),
       });
+
+      if (resetPeriod) {
+        afterPeriodChange?.();
+      }
     }
   };
 
@@ -210,12 +233,18 @@ export function PomodoroProvider({
 
   const skip = () => {
     resetPeriod();
+
+    beforePeriodChange?.();
     setPomodoroState({ period: period < periods.length - 1 ? period + 1 : 0 });
+    afterPeriodChange?.();
   };
 
   const previous = () => {
     resetPeriod();
+
+    beforePeriodChange?.();
     setPomodoroState({ period: period > 0 ? period - 1 : periods.length - 1 });
+    afterPeriodChange?.();
   };
 
   return (
