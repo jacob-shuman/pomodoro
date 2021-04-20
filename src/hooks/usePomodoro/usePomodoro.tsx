@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { useReduction } from "@hooks";
+import { createContext, useContext, useEffect } from "react";
+import { useReduction, useTheme } from "@hooks";
 import { useTimer } from "@hooks";
 import { decrementDuration } from "@utils/timer";
 import { PomodoroPeriod } from "@models/pomodoro";
@@ -20,6 +20,9 @@ export interface PomodoroProviderProps {
   onStart?: () => void;
   onPause?: () => void;
   onStop?: () => void;
+
+  beforePeriodChange?: () => void;
+  afterPeriodChange?: () => void;
 }
 
 export interface PomodoroContextProps {
@@ -42,6 +45,7 @@ export interface PomodoroContextProps {
 
   addPeriod: (newPeriod: PomodoroPeriod) => void;
   movePeriod: (source: number, destination: number) => void;
+  updatePeriod: (index: number, periodData: Partial<PomodoroPeriod>) => void;
   removePeriod: (index: number) => void;
 
   toggle: () => void;
@@ -77,6 +81,7 @@ const PomodoroContext = createContext<PomodoroContextProps>({
   resetPeriods: () => {},
   addPeriod: () => {},
   movePeriod: () => {},
+  updatePeriod: () => {},
   removePeriod: () => {},
   toggle: () => {},
   start: () => {},
@@ -93,9 +98,12 @@ export function PomodoroProvider({
   onStart,
   onPause,
   onStop,
+  beforePeriodChange,
+  afterPeriodChange,
 }: PomodoroProviderProps) {
   const [pomodoroState, setPomodoroState] = useReduction<PomodoroState>(state);
   const { isFinished, looping, periods, period } = pomodoroState;
+  const { setTheme } = useTheme();
 
   const timer = useTimer({
     onStart,
@@ -120,7 +128,9 @@ export function PomodoroProvider({
             timer.start();
           }
         } else {
+          beforePeriodChange?.();
           setPomodoroState({ period: period + 1 });
+          afterPeriodChange?.();
         }
       }
     },
@@ -135,10 +145,14 @@ export function PomodoroProvider({
 
   const stop = () => {
     timer.stop();
+
+    beforePeriodChange?.();
     setPomodoroState({
       periods: periods.map((p) => ({ ...p, remaining: undefined })),
       period: 0,
     });
+    afterPeriodChange?.();
+
     onStop?.();
   };
 
@@ -155,15 +169,27 @@ export function PomodoroProvider({
 
     updatedPeriods.splice(destination, 0, ...period);
 
+    beforePeriodChange?.();
     setPomodoroState({ periods: updatedPeriods });
+    afterPeriodChange?.();
   };
 
   const removePeriod = (index: number) => {
     if (periods.length > 1) {
+      const resetPeriod = period >= periods.length - 1;
+
+      if (resetPeriod) {
+        beforePeriodChange?.();
+      }
+
       setPomodoroState({
-        period: period >= periods.length - 1 ? 0 : period,
+        period: resetPeriod ? 0 : period,
         periods: periods.filter((p, i) => i !== index),
       });
+
+      if (resetPeriod) {
+        afterPeriodChange?.();
+      }
     }
   };
 
@@ -196,27 +222,39 @@ export function PomodoroProvider({
     return 100;
   };
 
-  const updatePeriod = (periodData: Partial<PomodoroPeriod>) => {
+  const updatePeriod = (index: number, periodData: Partial<PomodoroPeriod>) => {
     setPomodoroState({
       periods: periods.map((p, i) =>
-        i === period ? { ...p, ...periodData } : p
+        i === index ? { ...p, ...periodData } : p
       ),
     });
   };
 
   const resetPeriod = () => {
-    updatePeriod({ remaining: undefined });
+    updatePeriod(period, { remaining: undefined });
   };
 
   const skip = () => {
     resetPeriod();
+
+    beforePeriodChange?.();
     setPomodoroState({ period: period < periods.length - 1 ? period + 1 : 0 });
+    afterPeriodChange?.();
   };
 
   const previous = () => {
     resetPeriod();
+
+    beforePeriodChange?.();
     setPomodoroState({ period: period > 0 ? period - 1 : periods.length - 1 });
+    afterPeriodChange?.();
   };
+
+  useEffect(() => {
+    if (periods[period].theme) {
+      setTheme(periods[period].theme);
+    }
+  }, [periods[period]]);
 
   return (
     <PomodoroContext.Provider
@@ -241,6 +279,7 @@ export function PomodoroProvider({
 
         addPeriod,
         movePeriod,
+        updatePeriod,
         removePeriod,
 
         toggle,

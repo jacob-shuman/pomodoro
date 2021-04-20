@@ -9,17 +9,25 @@ import {
   PomodoroProvider,
   useAudio,
   usePomodoro,
+  useTheme,
 } from "@hooks";
 import "react-circular-progressbar/dist/styles.css";
 import { getHumanReadableDuration } from "@utils/timer";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
   const audio = useAudio();
+  const { setTheme, randomizeTheme } = useTheme();
+  const { period } = usePomodoro();
 
   return (
     <PomodoroProvider
       onStart={() => audio.play(audio.kit.play)}
       onPause={() => audio.play(audio.kit.pause)}
+      afterPeriodChange={() => {
+        if (period.theme) {
+          setTheme(period.theme);
+        }
+      }}
     >
       {children}
     </PomodoroProvider>
