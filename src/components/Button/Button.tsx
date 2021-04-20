@@ -1,7 +1,7 @@
 import { tw } from "twind";
 import NextLink from "next/link";
 import { ThemeState, useTheme } from "@hooks";
-import { ThemeStyles } from "@models/theme";
+import { Theme, ThemeStyles } from "@models/theme";
 
 export const getButtonClassName = ({
   className = "",
@@ -21,7 +21,7 @@ export const getButtonClassName = ({
     styles.rounded.all,
     styles.transition,
     styles.transform,
-    styles.focus,
+    styles.focus(theme),
 
     !className.includes(styles.font.title) &&
       !className.includes(styles.font.body) &&
@@ -34,7 +34,7 @@ export const getButtonClassName = ({
       : disabled
       ? `bg-[${theme.button.background.disabled}] text-[${theme.button.text.disabled}] cursor-not-allowed`
       : tw(
-          styles.hover,
+          styles.hover(theme),
 
           `bg-transparent text-[${theme.button.text.idle}]`,
           `hover:(bg-[${theme.button.background.hover}])`,
@@ -47,6 +47,7 @@ export const getButtonClassName = ({
   );
 
 export interface NormalButtonProps {
+  theme?: Theme;
   active?: boolean;
   icon?: boolean;
   size?: "small" | "large";
@@ -60,18 +61,19 @@ export const NormalButton: React.FC<
   active,
   icon,
   children,
+  theme,
   className,
   disabled,
   size = "small",
   ...props
 }) => {
-  const { theme, styles } = useTheme();
+  const { theme: _theme, styles } = useTheme();
 
   return (
     <button
       className={getButtonClassName({
         className,
-        theme,
+        theme: theme ?? _theme,
         styles,
         active,
         icon,

@@ -9,8 +9,8 @@ export interface ThemeStyles {
   ring: string;
   outline: {
     base: string;
-    hover: string;
-    focus: string;
+    hover: (theme?: Theme) => string;
+    focus: (theme?: Theme) => string;
   };
   rounded: {
     all: string;
@@ -18,8 +18,8 @@ export interface ThemeStyles {
   };
   transition: string;
   transform: string;
-  hover: string;
-  focus: string;
+  hover: (theme?: Theme) => string;
+  focus: (theme?: Theme) => string;
   font: {
     title: string;
     body: string;

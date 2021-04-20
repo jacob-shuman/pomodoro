@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { useReduction } from "@hooks";
+import { createContext, useContext, useEffect } from "react";
+import { useReduction, useTheme } from "@hooks";
 import { useTimer } from "@hooks";
 import { decrementDuration } from "@utils/timer";
 import { PomodoroPeriod } from "@models/pomodoro";
@@ -103,6 +103,7 @@ export function PomodoroProvider({
 }: PomodoroProviderProps) {
   const [pomodoroState, setPomodoroState] = useReduction<PomodoroState>(state);
   const { isFinished, looping, periods, period } = pomodoroState;
+  const { setTheme } = useTheme();
 
   const timer = useTimer({
     onStart,
@@ -248,6 +249,12 @@ export function PomodoroProvider({
     setPomodoroState({ period: period > 0 ? period - 1 : periods.length - 1 });
     afterPeriodChange?.();
   };
+
+  useEffect(() => {
+    if (periods[period].theme) {
+      setTheme(periods[period].theme);
+    }
+  }, [periods[period]]);
 
   return (
     <PomodoroContext.Provider

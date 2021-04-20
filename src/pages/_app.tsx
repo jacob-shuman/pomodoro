@@ -16,7 +16,7 @@ import { getHumanReadableDuration } from "@utils/timer";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
   const audio = useAudio();
-  const { setTheme } = useTheme();
+  const { setTheme, randomizeTheme } = useTheme();
   const { period } = usePomodoro();
 
   return (

@@ -9,6 +9,8 @@ import {
   DraggableProvided,
 } from "react-beautiful-dnd";
 import humanId from "human-id";
+import { Themes } from "@constants/theme";
+import { useEffect, useState } from "react";
 
 export interface PeriodCardProps
   extends React.ClassAttributes<HTMLButtonElement>,
@@ -104,6 +106,30 @@ export const PeriodListItem: React.FC<PeriodListItemProps> = ({
   );
 };
 
+const PeriodThemeButton: React.FC<{ period: number }> = ({ period }) => {
+  const pomodoro = usePomodoro();
+  const themes = Object.values(Themes);
+  const [index, setIndex] = useState(-1);
+
+  useEffect(() => {
+    pomodoro.updatePeriod(period, {
+      theme: index > -1 ? themes[index] : undefined,
+    });
+  }, [index]);
+
+  return (
+    <Button.Normal
+      disabled={pomodoro.isRunning}
+      theme={pomodoro.periods[period]?.theme}
+      onClick={() => {
+        setIndex(index < themes.length - 1 ? index + 1 : -1);
+      }}
+    >
+      Period Theme ({pomodoro.periods[period]?.theme?.title ?? "None"})
+    </Button.Normal>
+  );
+};
+
 export interface PeriodQueueProps {
   editable?: boolean; // Should Draggable/Droppable be rendered
 }
@@ -155,6 +181,8 @@ export const PeriodQueue: React.FC<PeriodQueueProps> = ({ editable }) => {
               >
                 {p.title}
               </PeriodCard>
+
+              {editable && <PeriodThemeButton period={i} />}
             </div>
           )}
         </PeriodListItem>
