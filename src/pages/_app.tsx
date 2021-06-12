@@ -12,6 +12,7 @@ import {
 } from "@hooks";
 import "react-circular-progressbar/dist/styles.css";
 import { getHumanReadableDuration } from "@utils/timer";
+import "../styles.css";
 
 const PomodoroWrapper: React.FC = ({ children }) => {
   const audio = useAudio();

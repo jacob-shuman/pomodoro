@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "pomodoro",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "out",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

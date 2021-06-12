@@ -12,7 +12,12 @@ class Document extends NextDocument {
     return (
       <Html
         lang="en"
-        style={{ height: "100%", width: "100%", margin: 0, overflow: "hidden" }}
+        style={{
+          height: "100%",
+          width: "100%",
+          margin: 0,
+          overflow: "hidden",
+        }}
       >
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
